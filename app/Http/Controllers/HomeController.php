@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Services\GymProfileService;
+use App\Services\MembershipPlanService;
 use App\Services\TrainingSessionService;
 use Illuminate\View\View;
 
@@ -10,7 +11,8 @@ class HomeController extends Controller
 {
     public function __construct(
         protected TrainingSessionService $trainingSessionService,
-        protected GymProfileService $gymProfileService
+        protected GymProfileService $gymProfileService,
+        protected MembershipPlanService $membershipPlanService
     ) {}
 
     public function index(): View
@@ -21,6 +23,9 @@ class HomeController extends Controller
 
             'gymProfile' => $this->gymProfileService
                 ->getActiveProfile(),
+
+            'membershipPlans' => $this->membershipPlanService
+                ->getActivePlans(),
         ]);
     }
 }

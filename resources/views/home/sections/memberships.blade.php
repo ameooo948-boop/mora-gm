@@ -1,0 +1,158 @@
+<section id="memberships" class="scroll-mt-24 border-b border-mora-border bg-mora-bg py-24 sm:py-28 lg:py-36">
+    <div class="mx-auto max-w-7xl px-5 sm:px-8 lg:px-10">
+
+        {{-- Header --}}
+        <div class="grid gap-8 lg:grid-cols-[1fr_0.65fr] lg:items-end">
+
+            <div>
+
+                <div class="mb-5 flex items-center gap-3">
+                    <span class="h-px w-10 bg-mora-accent"></span>
+
+                    <span class="text-[10px] font-semibold uppercase tracking-[0.3em] text-mora-accent">
+                        Memberships
+                    </span>
+                </div>
+
+                <h2 class="max-w-3xl font-display text-5xl font-semibold uppercase leading-[0.88] tracking-tight sm:text-6xl lg:text-8xl">
+                    Choose Your
+                    <span class="text-mora-accent">Commitment.</span>
+                </h2>
+
+            </div>
+
+            <p class="max-w-md text-sm leading-7 text-mora-muted lg:justify-self-end lg:pb-2">
+                Simple membership options designed around consistency,
+                progress, and long-term results.
+            </p>
+
+        </div>
+
+
+        {{-- Plans --}}
+        <div class="mt-14 grid gap-5 md:grid-cols-3">
+
+            @forelse ($membershipPlans as $plan)
+
+            <article class="group relative flex flex-col overflow-hidden border
+                    {{ $plan->is_featured
+                        ? 'border-mora-accent'
+                        : 'border-mora-border' }}
+                    bg-mora-card p-7 sm:p-8 lg:p-9">
+
+                {{-- Featured --}}
+                @if ($plan->is_featured)
+
+                <div class="absolute right-0 top-0 bg-mora-accent px-4 py-2">
+                    <span class="text-[8px] font-bold uppercase tracking-[0.2em] text-black">
+                        Most Popular
+                    </span>
+                </div>
+
+                @endif
+
+
+                {{-- Plan Name --}}
+                <div class="flex items-start justify-between">
+
+                    <span class="font-display text-5xl font-semibold uppercase leading-none">
+                        {{ $plan->name }}
+                    </span>
+
+                    <span class="font-display text-4xl font-bold text-white/[0.05]">
+                        {{ str_pad($loop->iteration, 2, '0', STR_PAD_LEFT) }}
+                    </span>
+
+                </div>
+
+
+                {{-- Description --}}
+                @if ($plan->short_description)
+
+                <p class="mt-5 min-h-12 text-sm leading-6 text-mora-muted">
+                    {{ $plan->short_description }}
+                </p>
+
+                @endif
+
+
+                {{-- Price --}}
+                <div class="mt-8 border-y border-white/10 py-6">
+
+                    @if ($plan->price !== null)
+
+                    <div class="flex items-end gap-2">
+
+                        <span class="font-display text-5xl font-semibold">
+                            {{ number_format((float) $plan->price, 0) }}
+                        </span>
+
+                        <span class="mb-2 text-xs uppercase tracking-[0.15em] text-mora-muted">
+                            EGP
+                        </span>
+
+                    </div>
+
+                    @else
+
+                    <p class="font-display text-3xl font-medium uppercase">
+                        Contact Us
+                    </p>
+
+                    <p class="mt-1 text-[9px] uppercase tracking-[0.2em] text-white/35">
+                        Pricing available at the gym
+                    </p>
+
+                    @endif
+
+                </div>
+
+
+                {{-- Features --}}
+                <ul class="mt-7 flex-1 space-y-4">
+
+                    @foreach ($plan->features ?? [] as $feature)
+
+                    <li class="flex items-start gap-3 text-sm text-white/65">
+
+                        <span class="mt-0.5 text-mora-accent">
+                            ✓
+                        </span>
+
+                        <span>
+                            {{ $feature }}
+                        </span>
+
+                    </li>
+
+                    @endforeach
+
+                </ul>
+
+
+                {{-- CTA --}}
+                <a href="#contact" class="mt-9 inline-flex items-center justify-center gap-3 border
+                        {{ $plan->is_featured
+                            ? 'border-mora-accent bg-mora-accent text-black hover:bg-mora-accent-hover'
+                            : 'border-white/15 text-white hover:border-white/35 hover:bg-white/5' }}
+                        px-6 py-4 text-xs font-bold tracking-[0.15em] transition-all duration-300">
+                    GET STARTED
+                    <span>→</span>
+                </a>
+
+            </article>
+
+            @empty
+
+            <div class="border border-mora-border bg-mora-card p-10 text-center md:col-span-3">
+                <p class="text-sm text-mora-muted">
+                    Membership plans are currently unavailable.
+                </p>
+            </div>
+
+            @endforelse
+
+        </div>
+
+    </div>
+</section>

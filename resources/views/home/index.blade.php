@@ -268,4 +268,6 @@
 
 @include('home.sections.about')
 
+@include('home.sections.memberships')
+
 @endsection
