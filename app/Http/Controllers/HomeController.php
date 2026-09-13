@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Services\GalleryItemService;
 use App\Services\GymProfileService;
 use App\Services\MembershipPlanService;
+use App\Services\TrainerService;
 use App\Services\TrainingSessionService;
 use Illuminate\View\View;
 
@@ -12,20 +14,19 @@ class HomeController extends Controller
     public function __construct(
         protected TrainingSessionService $trainingSessionService,
         protected GymProfileService $gymProfileService,
-        protected MembershipPlanService $membershipPlanService
+        protected MembershipPlanService $membershipPlanService,
+        protected TrainerService $trainerService,
+        protected GalleryItemService $galleryItemService
     ) {}
 
     public function index(): View
     {
         return view('home.index', [
-            'trainingSessions' => $this->trainingSessionService
-                ->getActiveSessions(),
-
-            'gymProfile' => $this->gymProfileService
-                ->getActiveProfile(),
-
-            'membershipPlans' => $this->membershipPlanService
-                ->getActivePlans(),
+            'trainingSessions' => $this->trainingSessionService->getActiveSessions(),
+            'gymProfile' => $this->gymProfileService->getActiveProfile(),
+            'membershipPlans' => $this->membershipPlanService->getActivePlans(),
+            'trainers' => $this->trainerService->getActiveTrainers(),
+            'galleryItems' => $this->galleryItemService->getActiveItems(),
         ]);
     }
 }

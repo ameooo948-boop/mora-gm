@@ -270,4 +270,8 @@
 
 @include('home.sections.memberships')
 
+@include('home.sections.trainer')
+
+@include('home.sections.gallery')
+
 @endsection

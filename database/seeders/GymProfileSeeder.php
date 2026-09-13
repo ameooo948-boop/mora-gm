@@ -31,7 +31,7 @@ class GymProfileSeeder extends Seeder
 
             'space_size' => 150,
 
-            'trainer_count' => 1,
+            'trainer_count' => 2,
 
             'is_active' => true,
         ]);

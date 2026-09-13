@@ -12,6 +12,8 @@ class DatabaseSeeder extends Seeder
             TrainingSessionSeeder::class,
             GymProfileSeeder::class,
             MembershipPlanSeeder::class,
+            TrainerSeeder::class,
+            GalleryItemSeeder::class,
         ]);
     }
 }

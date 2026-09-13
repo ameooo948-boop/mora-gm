@@ -4,15 +4,13 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
-class TrainingSession extends Model
+class GalleryItem extends Model
 {
     protected $fillable = [
-        'name',
-        'audience',
-        'starts_at',
-        'ends_at',
+        'title',
+        'category',
+        'image',
         'description',
         'is_active',
         'sort_order',
@@ -31,13 +29,5 @@ class TrainingSession extends Model
         return $query
             ->where('is_active', true)
             ->orderBy('sort_order');
-    }
-
-    public function trainers(): BelongsToMany
-    {
-        return $this->belongsToMany(
-            Trainer::class,
-            'training_session_trainer'
-        );
     }
 }

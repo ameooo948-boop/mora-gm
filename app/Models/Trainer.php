@@ -6,14 +6,15 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
-class TrainingSession extends Model
+class Trainer extends Model
 {
     protected $fillable = [
         'name',
-        'audience',
-        'starts_at',
-        'ends_at',
-        'description',
+        'slug',
+        'gender',
+        'specialization',
+        'bio',
+        'image',
         'is_active',
         'sort_order',
     ];
@@ -26,18 +27,18 @@ class TrainingSession extends Model
         ];
     }
 
+    public function trainingSessions(): BelongsToMany
+    {
+        return $this->belongsToMany(
+            TrainingSession::class,
+            'training_session_trainer'
+        );
+    }
+
     public function scopeActive(Builder $query): Builder
     {
         return $query
             ->where('is_active', true)
             ->orderBy('sort_order');
-    }
-
-    public function trainers(): BelongsToMany
-    {
-        return $this->belongsToMany(
-            Trainer::class,
-            'training_session_trainer'
-        );
     }
 }
