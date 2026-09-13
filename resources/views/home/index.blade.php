@@ -266,4 +266,6 @@
     </div>
 </section>
 
+@include('home.sections.about')
+
 @endsection

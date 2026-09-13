@@ -2,7 +2,9 @@
 
 namespace App\Providers;
 
+use App\Repositories\Contracts\GymProfileRepositoryInterface;
 use App\Repositories\Contracts\TrainingSessionRepositoryInterface;
+use App\Repositories\Eloquent\GymProfileRepository;
 use App\Repositories\Eloquent\TrainingSessionRepository;
 use Illuminate\Support\ServiceProvider;
 
@@ -13,6 +15,11 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(
             TrainingSessionRepositoryInterface::class,
             TrainingSessionRepository::class
+        );
+
+        $this->app->bind(
+            GymProfileRepositoryInterface::class,
+            GymProfileRepository::class
         );
     }
 

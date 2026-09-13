@@ -2,22 +2,25 @@
 
 namespace App\Http\Controllers;
 
+use App\Services\GymProfileService;
 use App\Services\TrainingSessionService;
 use Illuminate\View\View;
 
 class HomeController extends Controller
 {
     public function __construct(
-        protected TrainingSessionService $trainingSessionService
+        protected TrainingSessionService $trainingSessionService,
+        protected GymProfileService $gymProfileService
     ) {}
 
     public function index(): View
     {
-        $trainingSessions = $this->trainingSessionService
-            ->getActiveSessions();
-
         return view('home.index', [
-            'trainingSessions' => $trainingSessions,
+            'trainingSessions' => $this->trainingSessionService
+                ->getActiveSessions(),
+
+            'gymProfile' => $this->gymProfileService
+                ->getActiveProfile(),
         ]);
     }
 }
