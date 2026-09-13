@@ -20,6 +20,11 @@ class GymProfile extends Model
         'space_size',
         'trainer_count',
         'is_active',
+        'phone',
+        'whatsapp',
+        'email',
+        'address',
+        'instagram_url',
     ];
 
     protected function casts(): array

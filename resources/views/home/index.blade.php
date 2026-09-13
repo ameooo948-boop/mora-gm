@@ -105,7 +105,7 @@
 
             <div class="px-5 py-5 sm:px-8 lg:px-10">
                 <p class="font-display text-2xl font-semibold sm:text-3xl">
-                    01
+                    {{ str_pad($trainers->count(), 2, '0', STR_PAD_LEFT) }}
                 </p>
 
                 <p class="mt-1 text-[9px] uppercase tracking-[0.2em] text-white/45 sm:text-[10px]">
@@ -216,16 +216,16 @@
                             @if ($session->starts_at && $session->ends_at)
 
                             <p class="mt-2 font-display text-2xl font-medium tracking-tight sm:text-3xl">
-                                {{ \Carbon\Carbon::createFromFormat('H:i:s', $session->starts_at)->format('g:i A') }}
+                                {{ $session->formatted_start_time }}
 
                                 <span class="mx-1 text-mora-accent">
                                     —
                                 </span>
 
-                                {{ \Carbon\Carbon::createFromFormat('H:i:s', $session->ends_at)->format('g:i A') }}
+                                {{ $session->formatted_end_time }}
                             </p>
 
-                            @if (substr($session->ends_at, 0, 5) === '03:00')
+                            @if ($session->ends_next_day)
                             <p class="mt-1 text-[9px] uppercase tracking-[0.2em] text-white/30">
                                 Ends next day
                             </p>
@@ -273,5 +273,9 @@
 @include('home.sections.trainer')
 
 @include('home.sections.gallery')
+
+@include('home.sections.cta')
+
+@include('home.sections.contact')
 
 @endsection

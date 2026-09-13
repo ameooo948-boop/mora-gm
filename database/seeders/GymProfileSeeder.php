@@ -34,6 +34,12 @@ class GymProfileSeeder extends Seeder
             'trainer_count' => 2,
 
             'is_active' => true,
+
+            'phone' => '01063950691',
+            'whatsapp' => '01063950691',
+            'email' => 'amrwael105@gmail.com',
+            'address' => 'Dakahlia, Nabrooh, Al-Daroutain',
+            'instagram_url' => null,
         ]);
     }
 }

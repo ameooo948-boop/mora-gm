@@ -104,11 +104,10 @@
                                 </div>
 
                                 <span class="text-xs font-medium uppercase tracking-wide text-mora-muted">
-                                    {{ \Carbon\Carbon::createFromFormat('H:i:s', $session->starts_at)->format('g:i A') }}
-                                    —
-                                    {{ \Carbon\Carbon::createFromFormat('H:i:s', $session->ends_at)->format('g:i A') }}
+                                    {{ $session->formatted_start_time }} —
+                                    {{ $session->formatted_end_time }}
 
-                                    @if (substr($session->ends_at, 0, 5) === '03:00')
+                                    @if ($session->ends_next_day)
                                     <span class="text-mora-accent">NEXT DAY</span>
                                     @endif
                                 </span>
