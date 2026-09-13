@@ -1,0 +1,44 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Oswald:wght@400;500;600;700&display=swap');
+
+@import "tailwindcss";
+
+@theme {
+    --font-sans: "Inter", sans-serif;
+    --font-display: "Oswald", sans-serif;
+
+    --color-mora-bg: #0a0a0a;
+    --color-mora-surface: #111111;
+    --color-mora-card: #171717;
+    --color-mora-border: #262626;
+
+    --color-mora-text: #f5f5f5;
+    --color-mora-muted: #a3a3a3;
+
+    --color-mora-accent: #c8ff00;
+    --color-mora-accent-hover: #b5e600;
+}
+
+:root {
+    color-scheme: dark;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    background: #0a0a0a;
+    color: #f5f5f5;
+    font-family: "Inter", sans-serif;
+    -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+    background: #c8ff00;
+    color: #0a0a0a;
+}
+
+.font-display {
+    font-family: "Oswald", sans-serif;
+}
