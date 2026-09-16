@@ -131,14 +131,49 @@
 
 
                 {{-- CTA --}}
-                <a href="#contact" class="mt-9 inline-flex items-center justify-center gap-3 border
-                        {{ $plan->is_featured
-                            ? 'border-mora-accent bg-mora-accent text-black hover:bg-mora-accent-hover'
-                            : 'border-white/15 text-white hover:border-white/35 hover:bg-white/5' }}
-                        px-6 py-4 text-xs font-bold tracking-[0.15em] transition-all duration-300">
-                    ابدأ الآن
-                    <span>→</span>
-                </a>
+                @auth
+                    @if (auth()->user()->isMember())
+                        <form
+                            method="POST"
+                            action="{{ route('member.membership.subscribe', $plan) }}"
+                            class="mt-9"
+                        >
+                            @csrf
+
+                            <button
+                                type="submit"
+                                class="inline-flex w-full items-center justify-center gap-3 border
+                                    {{ $plan->is_featured
+                                        ? 'border-mora-accent bg-mora-accent text-black hover:bg-mora-accent-hover'
+                                        : 'border-white/15 text-white hover:border-white/35 hover:bg-white/5' }}
+                                    px-6 py-4 text-xs font-bold tracking-[0.15em] transition-all duration-300"
+                            >
+                                اشترك الآن
+                                <span aria-hidden="true">→</span>
+                            </button>
+                        </form>
+                    @elseif (auth()->user()->isAdmin())
+                        <a
+                            href="{{ route('admin.dashboard') }}"
+                            class="mt-9 inline-flex w-full items-center justify-center gap-3 border border-white/15 px-6 py-4 text-xs font-bold tracking-[0.15em] text-white transition-all duration-300 hover:border-white/35 hover:bg-white/5"
+                        >
+                            لوحة الإدارة
+                            <span aria-hidden="true">→</span>
+                        </a>
+                    @endif
+                @else
+                    <a
+                        href="{{ route('login') }}"
+                        class="mt-9 inline-flex w-full items-center justify-center gap-3 border
+                            {{ $plan->is_featured
+                                ? 'border-mora-accent bg-mora-accent text-black hover:bg-mora-accent-hover'
+                                : 'border-white/15 text-white hover:border-white/35 hover:bg-white/5' }}
+                            px-6 py-4 text-xs font-bold tracking-[0.15em] transition-all duration-300"
+                    >
+                        تسجيل الدخول للاشتراك
+                        <span aria-hidden="true">→</span>
+                    </a>
+                @endauth
 
             </article>
 

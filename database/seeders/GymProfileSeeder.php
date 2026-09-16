@@ -40,6 +40,7 @@ class GymProfileSeeder extends Seeder
             'email' => 'amrwael105@gmail.com',
             'address' => 'الدقهلية، نبروه، الدروتين',
             'instagram_url' => null,
+            'vodafone_cash' => '01063950691',
         ]);
     }
 }

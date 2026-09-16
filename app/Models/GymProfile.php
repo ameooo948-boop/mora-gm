@@ -25,6 +25,7 @@ class GymProfile extends Model
         'email',
         'address',
         'instagram_url',
+        'vodafone_cash',
     ];
 
     protected function casts(): array

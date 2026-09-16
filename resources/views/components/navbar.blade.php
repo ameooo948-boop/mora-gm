@@ -58,10 +58,29 @@
         </nav>
 
         {{-- Desktop CTA --}}
-        <a href="#memberships" class="hidden items-center gap-3 bg-mora-accent px-5 py-3 text-xs font-bold tracking-wider text-black transition hover:bg-mora-accent-hover lg:flex">
-            اشترك الآن
-            <span aria-hidden="true">→</span>
+        @auth
+
+        @if (auth()->user()->isAdmin())
+
+        <a href="{{ route('admin.dashboard') }}" class="inline-flex items-center justify-center rounded-md bg-mora-accent px-5 py-2.5 text-sm font-semibold text-mora-bg transition hover:bg-mora-accent-hover">
+            لوحة الإدارة
         </a>
+
+        @else
+
+        <a href="{{ route('member.dashboard') }}" class="inline-flex items-center justify-center rounded-md bg-mora-accent px-5 py-2.5 text-sm font-semibold text-mora-bg transition hover:bg-mora-accent-hover">
+            لوحة التحكم
+        </a>
+
+        @endif
+
+        @else
+
+        <a href="{{ route('login') }}" class="inline-flex items-center justify-center rounded-md bg-mora-accent px-5 py-2.5 text-sm font-semibold text-mora-bg transition hover:bg-mora-accent-hover">
+            تسجيل الدخول
+        </a>
+
+        @endauth
 
         {{-- Mobile Button --}}
         <button @click="open = !open" type="button" class="flex h-10 w-10 items-center justify-center text-mora-text lg:hidden" :aria-expanded="open" aria-label="فتح وإغلاق قائمة التنقل">

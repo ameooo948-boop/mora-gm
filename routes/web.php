@@ -3,6 +3,10 @@
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Member\DashboardController as MemberDashboardController;
+use App\Http\Controllers\Admin\PaymentController as AdminPaymentController;
+use App\Http\Controllers\Member\MembershipController;
+use App\Http\Controllers\Member\PaymentController;
+use App\Http\Controllers\Member\SubscriptionController;
 use App\Http\Controllers\Web\AuthController;
 use App\Http\Controllers\Web\PasswordController;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
@@ -69,6 +73,21 @@ Route::middleware(['auth', 'role:admin'])
 
         Route::get('/dashboard', [AdminDashboardController::class, 'index'])
             ->name('dashboard');
+
+        Route::get('/payments', [
+            AdminPaymentController::class,
+            'index',
+        ])->name('payments.index');
+
+        Route::post('/payments/{payment}/approve', [
+            AdminPaymentController::class,
+            'approve',
+        ])->name('payments.approve');
+
+        Route::post('/payments/{payment}/reject', [
+            AdminPaymentController::class,
+            'reject',
+        ])->name('payments.reject');
     });
 
 Route::middleware('auth')->group(function () {
@@ -106,3 +125,33 @@ Route::middleware('auth')->group(function () {
         ->middleware('throttle:6,1')
         ->name('verification.send');
 });
+
+Route::middleware(['auth', 'verified', 'role:member'])
+    ->prefix('member')
+    ->name('member.')
+    ->group(function () {
+        Route::get('/dashboard', [
+            MemberDashboardController::class,
+            'index',
+        ])->name('dashboard');
+
+        Route::get('/subscription', [
+            SubscriptionController::class,
+            'index',
+        ])->name('subscription');
+
+        Route::get('/payment/{payment}', [
+            PaymentController::class,
+            'show',
+        ])->name('payment.show');
+
+        Route::post('/payment/{payment}', [
+            PaymentController::class,
+            'submit',
+        ])->name('payment.submit');
+
+        Route::post('/membership/{membershipPlan}/subscribe', [
+            MembershipController::class,
+            'subscribe',
+        ])->name('membership.subscribe');
+    });

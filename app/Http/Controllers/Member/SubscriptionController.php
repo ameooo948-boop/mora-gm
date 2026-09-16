@@ -7,7 +7,7 @@ use App\Services\SubscriptionService;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 
-class DashboardController extends Controller
+class SubscriptionController extends Controller
 {
     public function __construct(
         protected SubscriptionService $subscriptionService
@@ -17,14 +17,12 @@ class DashboardController extends Controller
     {
         $user = $request->user();
 
-        return view('member.dashboard', [
-            'user' => $user,
-
+        return view('member.subscription', [
             'activeSubscription' => $this->subscriptionService
                 ->getActiveSubscription($user->id),
 
             'subscriptions' => $this->subscriptionService
-                ->getUserSubscriptions($user->id, 5),
+                ->getUserSubscriptions($user->id),
         ]);
     }
 }
