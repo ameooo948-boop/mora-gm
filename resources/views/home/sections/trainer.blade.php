@@ -5,18 +5,18 @@
         <div class="mb-12 flex flex-col justify-between gap-6 md:mb-16 md:flex-row md:items-end">
             <div class="max-w-2xl">
                 <p class="mb-4 text-xs font-bold uppercase tracking-[0.3em] text-mora-accent">
-                    TRAIN WITH EXPERIENCE.
+                    تدرّب مع الخبرة.
                 </p>
 
                 <h2 class="font-display text-4xl font-semibold uppercase leading-none tracking-tight text-mora-text sm:text-5xl md:text-6xl">
-                    Meet Your
-                    <span class="text-mora-accent">Trainers.</span>
+                    تعرّف على
+                    <span class="text-mora-accent">مدربيك.</span>
                 </h2>
             </div>
 
             <p class="max-w-md text-sm leading-7 text-mora-muted md:text-right">
-                Professional guidance, focused training, and the discipline
-                you need to keep moving forward.
+                إرشاد احترافي، وتدريب مركز، والانضباط
+                الذي تحتاجه لمواصلة التقدم.
             </p>
         </div>
 
@@ -48,7 +48,7 @@
 
                         <div class="absolute right-5 top-5">
                             <span class="font-display text-sm font-semibold uppercase tracking-[0.2em] text-white/30">
-                                COACH {{ str_pad($loop->iteration, 2, '0', STR_PAD_LEFT) }}
+                                مدرب {{ str_pad($loop->iteration, 2, '0', STR_PAD_LEFT) }}
                             </span>
                         </div>
                     </div>
@@ -83,12 +83,12 @@
                     </p>
                     @endif
 
-                    {{-- Training Sessions --}}
+                    {{-- موعد التدريبs --}}
                     @if ($trainer->trainingSessions->isNotEmpty())
                     <div class="border-t border-mora-border pt-5">
 
                         <p class="mb-3 text-[10px] font-bold uppercase tracking-[0.25em] text-mora-muted">
-                            Training Session
+                            موعد التدريب
                         </p>
 
                         <div class="space-y-3">
@@ -108,7 +108,7 @@
                                     {{ $session->formatted_end_time }}
 
                                     @if ($session->ends_next_day)
-                                    <span class="text-mora-accent">NEXT DAY</span>
+                                    <span class="text-mora-accent">اليوم التالي</span>
                                     @endif
                                 </span>
 
@@ -125,7 +125,7 @@
 
             <div class="col-span-full border border-dashed border-mora-border px-6 py-16 text-center">
                 <p class="text-sm text-mora-muted">
-                    Trainer information will be available soon.
+                    سيتم توفير معلومات المدربين قريبًا.
                 </p>
             </div>
 

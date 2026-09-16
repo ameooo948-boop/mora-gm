@@ -23,25 +23,25 @@
 
             <div>
                 <p class="mb-4 text-xs font-bold uppercase tracking-[0.3em] text-mora-accent">
-                    WELCOME BACK.
+                    مرحبًا بعودتك.
                 </p>
 
                 <h1 class="max-w-xl font-display text-6xl font-semibold uppercase leading-[0.9] tracking-tight xl:text-8xl">
-                    Train.
+                    تدرّب.
                     <br>
-                    <span class="text-mora-accent">Push.</span>
+                    <span class="text-mora-accent">تحدَّ نفسك.</span>
                     <br>
-                    Repeat.
+                    كرّر.
                 </h1>
 
                 <p class="mt-7 max-w-md text-sm leading-7 text-mora-muted">
-                    Your progress starts with consistency.
-                    Log in and keep moving forward.
+                    تقدّمك يبدأ بالاستمرارية.
+                    سجّل الدخول وواصل التقدّم.
                 </p>
             </div>
 
             <p class="text-xs uppercase tracking-[0.2em] text-mora-muted">
-                MORA GYM — STRONGER EVERY DAY.
+                MORA GYM — أقوى كل يوم.
             </p>
 
         </div>
@@ -61,15 +61,15 @@
 
             <div class="mb-8">
                 <p class="mb-3 text-xs font-bold uppercase tracking-[0.25em] text-mora-accent">
-                    MEMBER ACCESS
+                    دخول الأعضاء
                 </p>
 
                 <h2 class="font-display text-4xl font-semibold uppercase">
-                    Welcome Back.
+                    مرحبًا بعودتك.
                 </h2>
 
                 <p class="mt-3 text-sm text-mora-muted">
-                    Sign in to access your MORA account.
+                    سجّل الدخول للوصول إلى حسابك في MORA.
                 </p>
             </div>
 
@@ -86,7 +86,7 @@
 
                 <div>
                     <label for="email" class="mb-2 block text-xs font-bold uppercase tracking-[0.15em]">
-                        Email
+                        البريد الإلكتروني
                     </label>
 
                     <input id="email" type="email" name="email" value="{{ old('email') }}" required autofocus autocomplete="email" class="w-full rounded-[6px] border border-mora-border bg-mora-card px-4 py-3.5 text-sm outline-none transition placeholder:text-mora-muted/50 focus:border-mora-accent" placeholder="you@example.com">
@@ -102,11 +102,11 @@
                 <div>
                     <div class="mb-2 flex items-center justify-between gap-4">
                         <label for="password" class="block text-xs font-bold uppercase tracking-[0.15em]">
-                            Password
+                            كلمة المرور
                         </label>
 
                         <a href="{{ route('password.request') }}" class="text-xs text-mora-muted transition hover:text-mora-accent">
-                            Forgot password?
+                            هل نسيت كلمة المرور؟
                         </a>
                     </div>
 
@@ -124,23 +124,23 @@
                     <input type="checkbox" name="remember" value="1" class="h-4 w-4 rounded border-mora-border bg-mora-card accent-[#c8ff00]">
 
                     <span class="text-xs text-mora-muted">
-                        Remember me
+                        تذكرني
                     </span>
                 </label>
 
 
                 <button type="submit" class="flex w-full items-center justify-center rounded-[6px] bg-mora-accent px-6 py-4 text-sm font-bold uppercase tracking-wide text-black transition hover:bg-mora-accent-hover">
-                    Sign In
+                    تسجيل الدخول
                 </button>
 
             </form>
 
 
             <p class="mt-8 text-center text-sm text-mora-muted">
-                Don't have an account?
+                ليس لديك حساب؟
 
                 <a href="{{ route('register') }}" class="font-semibold text-mora-text transition hover:text-mora-accent">
-                    Create one
+                    إنشاء حساب
                 </a>
             </p>
 

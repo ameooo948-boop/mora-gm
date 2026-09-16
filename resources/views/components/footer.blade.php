@@ -9,12 +9,12 @@
                 </div>
 
                 <p class="mt-2 text-sm text-mora-muted">
-                    Stronger every day.
+                    أقوى كل يوم.
                 </p>
             </div>
 
             <p class="text-xs text-mora-muted">
-                © {{ date('Y') }} MORA GYM. All rights reserved.
+                © {{ date('Y') }} MORA GYM. جميع الحقوق محفوظة.
             </p>
 
         </div>

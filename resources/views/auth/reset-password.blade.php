@@ -17,7 +17,7 @@
             </p>
 
             <h1 class="mt-3 font-display text-4xl font-semibold uppercase">
-                Create A New Password.
+                أنشئ كلمة مرور جديدة.
             </h1>
 
         </div>
@@ -31,7 +31,7 @@
 
                 <div>
                     <label for="email" class="mb-2 block text-xs font-bold uppercase tracking-[0.15em]">
-                        Email
+                        البريد الإلكتروني
                     </label>
 
                     <input id="email" type="email" name="email" value="{{ old('email', $email) }}" required autocomplete="email" class="w-full rounded-[6px] border border-mora-border bg-mora-surface px-4 py-3.5 text-sm outline-none transition focus:border-mora-accent">
@@ -45,7 +45,7 @@
 
                 <div>
                     <label for="password" class="mb-2 block text-xs font-bold uppercase tracking-[0.15em]">
-                        New Password
+                        كلمة المرور الجديدة
                     </label>
 
                     <input id="password" type="password" name="password" required autocomplete="new-password" class="w-full rounded-[6px] border border-mora-border bg-mora-surface px-4 py-3.5 text-sm outline-none transition focus:border-mora-accent">
@@ -59,14 +59,14 @@
 
                 <div>
                     <label for="password_confirmation" class="mb-2 block text-xs font-bold uppercase tracking-[0.15em]">
-                        Confirm Password
+                        تأكيد كلمة المرور
                     </label>
 
                     <input id="password_confirmation" type="password" name="password_confirmation" required autocomplete="new-password" class="w-full rounded-[6px] border border-mora-border bg-mora-surface px-4 py-3.5 text-sm outline-none transition focus:border-mora-accent">
                 </div>
 
                 <button type="submit" class="w-full rounded-[6px] bg-mora-accent px-6 py-4 text-sm font-bold uppercase tracking-wide text-black transition hover:bg-mora-accent-hover">
-                    Reset Password
+                    إعادة تعيين كلمة المرور
                 </button>
 
             </form>

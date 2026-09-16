@@ -40,7 +40,7 @@ class AuthController extends Controller
             ->route('verification.notice')
             ->with(
                 'success',
-                'Your account has been created. Please verify your email address.'
+                'تم إنشاء حسابك بنجاح. يُرجى تفعيل بريدك الإلكتروني.'
             );
     }
 
@@ -55,7 +55,7 @@ class AuthController extends Controller
         if (! $authenticated) {
             return back()
                 ->withErrors([
-                    'email' => 'The provided credentials are incorrect.',
+                    'email' => 'بيانات تسجيل الدخول التي أدخلتها غير صحيحة.',
                 ])
                 ->onlyInput('email');
         }

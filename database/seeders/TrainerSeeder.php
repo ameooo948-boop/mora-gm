@@ -23,8 +23,8 @@ class TrainerSeeder extends Seeder
             [
                 'name' => 'Mai Omar',
                 'gender' => 'female',
-                'specialization' => 'Physical Education',
-                'bio' => 'A qualified fitness coach with a background in Physical Education, dedicated to helping members train consistently and achieve their goals.',
+                'specialization' => 'تربية رياضية',
+                'bio' => 'مدرب لياقة مؤهل بخلفية في التربية الرياضية، يكرّس خبرته لمساعدة الأعضاء على التدريب باستمرار وتحقيق أهدافهم.',
                 'image' => null,
                 'is_active' => true,
                 'sort_order' => 1,
@@ -36,8 +36,8 @@ class TrainerSeeder extends Seeder
             [
                 'name' => 'Mohamed Ramadan',
                 'gender' => 'male',
-                'specialization' => 'Physical Education',
-                'bio' => 'A qualified fitness coach with a background in Physical Education, focused on helping members build strength, consistency, and better training habits.',
+                'specialization' => 'تربية رياضية',
+                'bio' => 'مدرب لياقة مؤهل بخلفية في التربية الرياضية، يركز على مساعدة الأعضاء في بناء القوة والاستمرارية وعادات تدريب أفضل.',
                 'image' => null,
                 'is_active' => true,
                 'sort_order' => 2,

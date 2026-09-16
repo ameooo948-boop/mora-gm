@@ -4,7 +4,7 @@
     <div class="mx-auto flex h-20 max-w-7xl items-center justify-between px-5 sm:px-8 lg:px-10">
 
         {{-- Logo --}}
-        <a href="/" class="group flex items-center gap-3" aria-label="MORA Gym home">
+        <a href="/" class="group flex items-center gap-3" aria-label="الصفحة الرئيسية لـ MORA GYM">
 
             <div class="flex h-10 w-10 items-center justify-center">
                 <span class="font-display text-3xl font-bold tracking-tight text-mora-text">
@@ -28,43 +28,43 @@
         <nav class="hidden items-center gap-8 lg:flex">
 
             <a href="/" class="text-sm font-medium text-mora-text transition hover:text-mora-accent">
-                Home
+                الرئيسية
             </a>
 
             <a href="#about" class="text-sm font-medium text-mora-muted transition hover:text-mora-accent">
-                About
+                عن MORA
             </a>
 
             <a href="#memberships" class="text-sm font-medium text-mora-muted transition hover:text-mora-accent">
-                Memberships
+                العضويات
             </a>
 
             <a href="#trainer" class="text-sm font-medium text-mora-muted transition hover:text-mora-accent">
-                Trainer
+                المدربون
             </a>
 
             <a href="#gallery" class="text-sm font-medium text-mora-muted transition hover:text-mora-accent">
-                Gallery
+                معرض الصور
             </a>
 
             <a href="#contact" class="text-sm font-medium text-mora-muted transition hover:text-mora-accent">
-                Contact
+                تواصل معنا
             </a>
 
             <a href="#sessions" class="text-sm font-medium text-mora-muted transition hover:text-mora-accent">
-                Sessions
+                مواعيد التدريب
             </a>
 
         </nav>
 
         {{-- Desktop CTA --}}
         <a href="#memberships" class="hidden items-center gap-3 bg-mora-accent px-5 py-3 text-xs font-bold tracking-wider text-black transition hover:bg-mora-accent-hover lg:flex">
-            JOIN NOW
+            اشترك الآن
             <span aria-hidden="true">→</span>
         </a>
 
         {{-- Mobile Button --}}
-        <button @click="open = !open" type="button" class="flex h-10 w-10 items-center justify-center text-mora-text lg:hidden" :aria-expanded="open" aria-label="Toggle navigation">
+        <button @click="open = !open" type="button" class="flex h-10 w-10 items-center justify-center text-mora-text lg:hidden" :aria-expanded="open" aria-label="فتح وإغلاق قائمة التنقل">
             <svg x-show="!open" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 6h16M4 12h16M4 18h16" />
             </svg>
@@ -81,31 +81,31 @@
         <nav class="mx-auto flex max-w-7xl flex-col px-5 py-6 sm:px-8">
 
             <a @click="open = false" href="/" class="border-b border-mora-border py-4 text-sm font-medium">
-                Home
+                الرئيسية
             </a>
 
             <a @click="open = false" href="#about" class="border-b border-mora-border py-4 text-sm font-medium text-mora-muted">
-                About
+                عن MORA
             </a>
 
             <a @click="open = false" href="#memberships" class="border-b border-mora-border py-4 text-sm font-medium text-mora-muted">
-                Memberships
+                العضويات
             </a>
 
             <a @click="open = false" href="#trainer" class="border-b border-mora-border py-4 text-sm font-medium text-mora-muted">
-                Trainer
+                المدربون
             </a>
 
             <a @click="open = false" href="#gallery" class="border-b border-mora-border py-4 text-sm font-medium text-mora-muted">
-                Gallery
+                معرض الصور
             </a>
 
             <a @click="open = false" href="#contact" class="py-4 text-sm font-medium text-mora-muted">
-                Contact
+                تواصل معنا
             </a>
 
             <a @click="open = false" href="#memberships" class="mt-4 flex items-center justify-center gap-3 bg-mora-accent px-5 py-4 text-xs font-bold tracking-wider text-black">
-                JOIN NOW
+                اشترك الآن
                 <span>→</span>
             </a>
 

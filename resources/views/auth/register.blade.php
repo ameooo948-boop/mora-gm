@@ -12,15 +12,15 @@
             </a>
 
             <p class="mt-8 text-xs font-bold uppercase tracking-[0.25em] text-mora-accent">
-                START YOUR JOURNEY.
+                ابدأ رحلتك.
             </p>
 
             <h1 class="mt-3 font-display text-4xl font-semibold uppercase">
-                Create Your Account.
+                أنشئ حسابك.
             </h1>
 
             <p class="mt-3 text-sm text-mora-muted">
-                Join MORA and start building better habits.
+                انضم إلى MORA وابدأ في بناء عادات أفضل.
             </p>
         </div>
 
@@ -32,7 +32,7 @@
 
                 <div>
                     <label for="name" class="mb-2 block text-xs font-bold uppercase tracking-[0.15em]">
-                        Full Name
+                        الاسم الكامل
                     </label>
 
                     <input id="name" type="text" name="name" value="{{ old('name') }}" required autofocus autocomplete="name" class="w-full rounded-[6px] border border-mora-border bg-mora-surface px-4 py-3.5 text-sm outline-none transition focus:border-mora-accent" placeholder="Your full name">
@@ -49,7 +49,7 @@
 
                     <div>
                         <label for="email" class="mb-2 block text-xs font-bold uppercase tracking-[0.15em]">
-                            Email
+                            البريد الإلكتروني
                         </label>
 
                         <input id="email" type="email" name="email" value="{{ old('email') }}" required autocomplete="email" class="w-full rounded-[6px] border border-mora-border bg-mora-surface px-4 py-3.5 text-sm outline-none transition focus:border-mora-accent" placeholder="you@example.com">
@@ -64,7 +64,7 @@
 
                     <div>
                         <label for="phone" class="mb-2 block text-xs font-bold uppercase tracking-[0.15em]">
-                            Phone
+                            رقم الهاتف
                         </label>
 
                         <input id="phone" type="tel" name="phone" value="{{ old('phone') }}" autocomplete="tel" class="w-full rounded-[6px] border border-mora-border bg-mora-surface px-4 py-3.5 text-sm outline-none transition focus:border-mora-accent" placeholder="01xxxxxxxxx">
@@ -81,7 +81,7 @@
 
                 <div>
                     <label for="password" class="mb-2 block text-xs font-bold uppercase tracking-[0.15em]">
-                        Password
+                        كلمة المرور
                     </label>
 
                     <input id="password" type="password" name="password" required autocomplete="new-password" class="w-full rounded-[6px] border border-mora-border bg-mora-surface px-4 py-3.5 text-sm outline-none transition focus:border-mora-accent" placeholder="At least 8 characters">
@@ -96,7 +96,7 @@
 
                 <div>
                     <label for="password_confirmation" class="mb-2 block text-xs font-bold uppercase tracking-[0.15em]">
-                        Confirm Password
+                        Confirm كلمة المرور
                     </label>
 
                     <input id="password_confirmation" type="password" name="password_confirmation" required autocomplete="new-password" class="w-full rounded-[6px] border border-mora-border bg-mora-surface px-4 py-3.5 text-sm outline-none transition focus:border-mora-accent" placeholder="Repeat your password">
@@ -104,7 +104,7 @@
 
 
                 <button type="submit" class="mt-2 flex w-full items-center justify-center rounded-[6px] bg-mora-accent px-6 py-4 text-sm font-bold uppercase tracking-wide text-black transition hover:bg-mora-accent-hover">
-                    Create Account
+                    إنشاء الحساب
                 </button>
 
             </form>
@@ -113,10 +113,10 @@
 
 
         <p class="mt-8 text-center text-sm text-mora-muted">
-            Already have an account?
+            لديك حساب بالفعل؟
 
             <a href="{{ route('login') }}" class="font-semibold text-mora-text transition hover:text-mora-accent">
-                Sign in
+                تسجيل الدخول
             </a>
         </p>
 

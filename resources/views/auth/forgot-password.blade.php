@@ -12,15 +12,15 @@
             </a>
 
             <p class="mt-8 text-xs font-bold uppercase tracking-[0.25em] text-mora-accent">
-                ACCOUNT RECOVERY.
+                استعادة الحساب.
             </p>
 
             <h1 class="mt-3 font-display text-4xl font-semibold uppercase">
-                Reset Your Password.
+                أعد تعيين كلمة المرور.
             </h1>
 
             <p class="mt-3 text-sm leading-6 text-mora-muted">
-                Enter your email and we'll send you a secure password reset link.
+                أدخل بريدك الإلكتروني وسنرسل إليك رابطًا آمنًا لإعادة تعيين كلمة المرور.
             </p>
         </div>
 
@@ -36,7 +36,7 @@
                 @csrf
 
                 <label for="email" class="mb-2 block text-xs font-bold uppercase tracking-[0.15em]">
-                    Email
+                    البريد الإلكتروني
                 </label>
 
                 <input id="email" type="email" name="email" value="{{ old('email') }}" required autofocus autocomplete="email" class="w-full rounded-[6px] border border-mora-border bg-mora-surface px-4 py-3.5 text-sm outline-none transition focus:border-mora-accent" placeholder="you@example.com">
@@ -48,17 +48,17 @@
                 @enderror
 
                 <button type="submit" class="mt-6 w-full rounded-[6px] bg-mora-accent px-6 py-4 text-sm font-bold uppercase tracking-wide text-black transition hover:bg-mora-accent-hover">
-                    Send Reset Link
+                    إرسال رابط إعادة التعيين
                 </button>
             </form>
 
         </div>
 
         <p class="mt-8 text-center text-sm text-mora-muted">
-            Remember your password?
+            تذكرت كلمة المرور؟
 
             <a href="{{ route('login') }}" class="font-semibold text-mora-text transition hover:text-mora-accent">
-                Back to Sign In
+                العودة إلى تسجيل الدخول
             </a>
         </p>
 

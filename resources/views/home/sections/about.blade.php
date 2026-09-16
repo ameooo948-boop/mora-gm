@@ -33,7 +33,7 @@
                     </span>
 
                     <p class="mt-1 text-[8px] uppercase tracking-[0.25em] text-white/45">
-                        Training Space
+                        مساحة التدريب
                     </p>
 
                 </div>
@@ -72,7 +72,7 @@
 
                     <div>
                         <span class="text-[9px] font-semibold uppercase tracking-[0.25em] text-mora-accent">
-                            {{ $gymProfile->mission_title ?? 'Our Mission' }}
+                            {{ $gymProfile->mission_title ?? 'رسالتنا' }}
                         </span>
 
                         <p class="mt-3 text-sm leading-7 text-white/60">
@@ -87,7 +87,7 @@
 
                     <div>
                         <span class="text-[9px] font-semibold uppercase tracking-[0.25em] text-mora-accent">
-                            {{ $gymProfile->vision_title ?? 'Our Vision' }}
+                            {{ $gymProfile->vision_title ?? 'رؤيتنا' }}
                         </span>
 
                         <p class="mt-3 text-sm leading-7 text-white/60">

@@ -2,7 +2,6 @@
 
 namespace App\Providers;
 
-use App\Contracts\Repositories\UserRepositoryInterface;
 use App\Repositories\Contracts\GalleryItemRepositoryInterface;
 use App\Repositories\Contracts\GymProfileRepositoryInterface;
 use App\Repositories\Contracts\MembershipPlanRepositoryInterface;

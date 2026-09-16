@@ -10,20 +10,20 @@
                     <span class="h-px w-10 bg-mora-accent"></span>
 
                     <span class="text-[10px] font-semibold uppercase tracking-[0.3em] text-mora-accent">
-                        Memberships
+                        العضويات
                     </span>
                 </div>
 
                 <h2 class="max-w-3xl font-display text-5xl font-semibold uppercase leading-[0.88] tracking-tight sm:text-6xl lg:text-8xl">
-                    Choose Your
-                    <span class="text-mora-accent">Commitment.</span>
+                    اختر
+                    <span class="text-mora-accent">التزامك.</span>
                 </h2>
 
             </div>
 
             <p class="max-w-md text-sm leading-7 text-mora-muted lg:justify-self-end lg:pb-2">
-                Simple membership options designed around consistency,
-                progress, and long-term results.
+                خيارات عضوية بسيطة مصممة حول الاستمرارية،
+                والتقدم، والنتائج طويلة المدى.
             </p>
 
         </div>
@@ -45,7 +45,7 @@
 
                 <div class="absolute right-0 top-0 bg-mora-accent px-4 py-2">
                     <span class="text-[8px] font-bold uppercase tracking-[0.2em] text-black">
-                        Most Popular
+                        الأكثر طلبًا
                     </span>
                 </div>
 
@@ -96,11 +96,11 @@
                     @else
 
                     <p class="font-display text-3xl font-medium uppercase">
-                        Contact Us
+                        تواصل معنا
                     </p>
 
                     <p class="mt-1 text-[9px] uppercase tracking-[0.2em] text-white/35">
-                        Pricing available at the gym
+                        الأسعار متاحة داخل الجيم
                     </p>
 
                     @endif
@@ -136,7 +136,7 @@
                             ? 'border-mora-accent bg-mora-accent text-black hover:bg-mora-accent-hover'
                             : 'border-white/15 text-white hover:border-white/35 hover:bg-white/5' }}
                         px-6 py-4 text-xs font-bold tracking-[0.15em] transition-all duration-300">
-                    GET STARTED
+                    ابدأ الآن
                     <span>→</span>
                 </a>
 
@@ -146,7 +146,7 @@
 
             <div class="border border-mora-border bg-mora-card p-10 text-center md:col-span-3">
                 <p class="text-sm text-mora-muted">
-                    Membership plans are currently unavailable.
+                    خطط العضوية غير متاحة حاليًا.
                 </p>
             </div>
 

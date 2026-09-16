@@ -5,18 +5,18 @@
         <div class="mb-12 flex flex-col gap-6 md:mb-16 md:flex-row md:items-end md:justify-between">
             <div>
                 <p class="mb-4 text-xs font-bold uppercase tracking-[0.3em] text-mora-accent">
-                    INSIDE MORA.
+                    داخل MORA.
                 </p>
 
                 <h2 class="font-display text-4xl font-semibold uppercase leading-none tracking-tight text-mora-text sm:text-5xl md:text-6xl">
-                    Built To
-                    <span class="text-mora-accent">Move.</span>
+                    مصمم من أجل
+                    <span class="text-mora-accent">الحركة.</span>
                 </h2>
             </div>
 
             <p class="max-w-md text-sm leading-7 text-mora-muted md:text-right">
-                Take a look inside the space where discipline,
-                consistency, and progress come together.
+                ألقِ نظرة على المساحة التي تجتمع فيها روح الانضباط،
+                والاستمرارية، والتقدم.
             </p>
         </div>
 

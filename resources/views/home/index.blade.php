@@ -32,7 +32,7 @@
                 <span class="h-px w-10 bg-mora-accent"></span>
 
                 <span class="text-[10px] font-semibold uppercase tracking-[0.3em] text-mora-accent sm:text-xs">
-                    MORA GYM / FITNESS
+                    MORA GYM / اللياقة البدنية
                 </span>
 
             </div>
@@ -41,27 +41,27 @@
             {{-- Heading --}}
             <h1 class="font-display text-[clamp(3.8rem,7vw,7rem)] font-bold uppercase leading-[0.84] tracking-[-0.025em]">
 
-                Train
+                تدرّب
                 <br>
 
                 <span class="text-mora-accent">
-                    Harder.
+                    بقوة أكبر.
                 </span>
 
                 <br>
 
-                Live
+                عِش
                 <br>
 
-                Stronger.
+                بقوة أكبر.
 
             </h1>
 
 
             {{-- Description --}}
             <p class="mt-7 max-w-xl text-sm leading-7 text-white/65 sm:text-base sm:leading-8">
-                A focused space to train, improve, and become stronger every day.
-                Professional guidance, quality equipment, and a community built around progress.
+                مساحة متخصصة للتدريب والتطور وبناء قوة أكبر كل يوم.
+                إرشاد احترافي، ومعدات عالية الجودة، ومجتمع يقوم على التقدم.
             </p>
 
 
@@ -69,7 +69,7 @@
             <div class="mt-8 flex flex-col gap-3 sm:flex-row">
 
                 <a href="#memberships" class="group inline-flex items-center justify-center gap-4 bg-mora-accent px-7 py-4 text-xs font-bold tracking-[0.15em] text-black transition-all duration-300 hover:bg-mora-accent-hover">
-                    JOIN NOW
+                    اشترك الآن
 
                     <span class="text-base transition-transform duration-300 group-hover:translate-x-1">
                         →
@@ -77,7 +77,7 @@
                 </a>
 
                 <a href="#about" class="inline-flex items-center justify-center border border-white/20 px-7 py-4 text-xs font-bold tracking-[0.15em] text-white transition-all duration-300 hover:border-white/40 hover:bg-white/5">
-                    DISCOVER MORA
+                    اكتشف MORA
                 </a>
 
             </div>
@@ -98,7 +98,7 @@
                 </p>
 
                 <p class="mt-1 text-[9px] uppercase tracking-[0.2em] text-white/45 sm:text-[10px]">
-                    Training Space
+                    مساحة التدريب
                 </p>
             </div>
 
@@ -109,7 +109,7 @@
                 </p>
 
                 <p class="mt-1 text-[9px] uppercase tracking-[0.2em] text-white/45 sm:text-[10px]">
-                    Professional Trainer
+                    مدرب محترف
                 </p>
             </div>
 
@@ -120,7 +120,7 @@
                 </p>
 
                 <p class="mt-1 text-[9px] uppercase tracking-[0.2em] text-white/45 sm:text-[10px]">
-                    Daily Sessions
+                    مواعيد تدريب يومية
                 </p>
             </div>
 
@@ -142,13 +142,13 @@
                     <span class="h-px w-10 bg-mora-accent"></span>
 
                     <span class="text-[10px] font-semibold uppercase tracking-[0.3em] text-mora-accent sm:text-xs">
-                        Training Sessions
+                        مواعيد التدريب
                     </span>
                 </div>
 
                 <h2 class="max-w-3xl font-display text-5xl font-semibold uppercase leading-[0.88] tracking-tight sm:text-6xl lg:text-8xl">
-                    Train
-                    <span class="text-mora-accent">Your Way.</span>
+                    تدرّب
+                    <span class="text-mora-accent">بطريقتك.</span>
                 </h2>
 
             </div>
@@ -178,7 +178,7 @@
                 <div class="relative flex items-start justify-between">
 
                     <span class="font-display text-sm font-medium tracking-[0.2em] text-white/30">
-                        SESSION {{ str_pad($loop->iteration, 2, '0', STR_PAD_LEFT) }}
+                        موعد {{ str_pad($loop->iteration, 2, '0', STR_PAD_LEFT) }}
                     </span>
 
                     <span class="border border-mora-accent/30 px-3 py-1.5 text-[9px] font-semibold uppercase tracking-[0.2em] text-mora-accent">
@@ -210,7 +210,7 @@
                         <div>
 
                             <p class="text-[9px] font-semibold uppercase tracking-[0.25em] text-white/35">
-                                Training Hours
+                                ساعات التدريب
                             </p>
 
                             @if ($session->starts_at && $session->ends_at)
@@ -227,14 +227,14 @@
 
                             @if ($session->ends_next_day)
                             <p class="mt-1 text-[9px] uppercase tracking-[0.2em] text-white/30">
-                                Ends next day
+                                ينتهي في اليوم التالي
                             </p>
                             @endif
 
                             @else
 
                             <p class="mt-2 font-display text-2xl font-medium">
-                                Schedule coming soon
+                                سيتم الإعلان عن المواعيد قريبًا
                             </p>
 
                             @endif
@@ -255,7 +255,7 @@
 
             <div class="border border-mora-border bg-mora-card p-10 text-center md:col-span-2">
                 <p class="text-sm text-mora-muted">
-                    Training sessions are currently unavailable.
+                    مواعيد التدريب غير متاحة حاليًا.
                 </p>
             </div>
 

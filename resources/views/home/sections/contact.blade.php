@@ -4,11 +4,11 @@
         {{-- Header --}}
         <div class="mb-12 md:mb-16">
             <p class="mb-4 text-xs font-bold uppercase tracking-[0.3em] text-mora-accent">
-                GET IN TOUCH.
+                تواصل معنا.
             </p>
 
             <h2 class="font-display text-4xl font-semibold uppercase leading-none tracking-tight text-mora-text sm:text-5xl md:text-6xl">
-                Find Your Way
+                اعرف طريقك
                 <span class="text-mora-accent">To MORA.</span>
             </h2>
         </div>
@@ -34,7 +34,7 @@
                     @if ($gymProfile?->phone)
                     <a href="tel:{{ $gymProfile->phone }}" class="group rounded-[6px] border border-mora-border bg-mora-surface p-5 transition hover:border-mora-accent/50">
                         <span class="mb-3 block text-[10px] font-bold uppercase tracking-[0.25em] text-mora-muted">
-                            Phone
+                            الهاتف
                         </span>
 
                         <span class="text-sm font-semibold text-mora-text transition group-hover:text-mora-accent">
@@ -46,7 +46,7 @@
                     @if ($gymProfile?->whatsapp)
                     <a href="https://wa.me/{{ preg_replace('/\D+/', '', $gymProfile->whatsapp) }}" target="_blank" rel="noopener noreferrer" class="group rounded-[6px] border border-mora-border bg-mora-surface p-5 transition hover:border-mora-accent/50">
                         <span class="mb-3 block text-[10px] font-bold uppercase tracking-[0.25em] text-mora-muted">
-                            WhatsApp
+                            واتساب
                         </span>
 
                         <span class="text-sm font-semibold text-mora-text transition group-hover:text-mora-accent">
@@ -58,7 +58,7 @@
                     @if ($gymProfile?->email)
                     <a href="mailto:{{ $gymProfile->email }}" class="group rounded-[6px] border border-mora-border bg-mora-surface p-5 transition hover:border-mora-accent/50">
                         <span class="mb-3 block text-[10px] font-bold uppercase tracking-[0.25em] text-mora-muted">
-                            Email
+                            البريد الإلكتروني
                         </span>
 
                         <span class="break-all text-sm font-semibold text-mora-text transition group-hover:text-mora-accent">
@@ -70,7 +70,7 @@
                     @if ($gymProfile?->address)
                     <div class="rounded-[6px] border border-mora-border bg-mora-surface p-5">
                         <span class="mb-3 block text-[10px] font-bold uppercase tracking-[0.25em] text-mora-muted">
-                            Location
+                            الموقع
                         </span>
 
                         <span class="text-sm font-semibold leading-6 text-mora-text">
@@ -84,7 +84,7 @@
                 @if ($gymProfile?->instagram_url)
                 <div class="mt-4">
                     <a href="{{ $gymProfile->instagram_url }}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-3 rounded-[6px] border border-mora-border px-5 py-3 text-xs font-bold uppercase tracking-wide text-mora-text transition hover:border-mora-accent hover:text-mora-accent">
-                        Follow MORA on Instagram
+                        تابع MORA على Instagram
                         <span>↗</span>
                     </a>
                 </div>
@@ -96,11 +96,11 @@
             <div class="rounded-[10px] border border-mora-border bg-mora-card p-6 sm:p-8 md:p-10">
 
                 <p class="mb-2 text-[10px] font-bold uppercase tracking-[0.25em] text-mora-accent">
-                    OPEN DAILY
+                    مفتوح يوميًا
                 </p>
 
                 <h3 class="font-display text-3xl font-semibold uppercase text-mora-text">
-                    Training Sessions
+                    مواعيد التدريب
                 </h3>
 
                 <div class="mt-8 divide-y divide-mora-border">
@@ -126,7 +126,7 @@
 
                             @if ($session->ends_next_day)
                             <span class="ml-1 text-xs font-bold text-mora-accent">
-                                NEXT DAY
+                                اليوم التالي
                             </span>
                             @endif
                         </p>

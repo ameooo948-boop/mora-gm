@@ -17,11 +17,11 @@
             </div>
 
             <p class="mt-7 text-xs font-bold uppercase tracking-[0.25em] text-mora-accent">
-                ONE MORE STEP.
+                خطوة أخيرة.
             </p>
 
             <h1 class="mt-3 font-display text-4xl font-semibold uppercase">
-                Verify Your Email.
+                فعّل بريدك الإلكتروني.
             </h1>
 
             <p class="mt-4 text-sm leading-7 text-mora-muted">
@@ -39,7 +39,7 @@
                 @csrf
 
                 <button type="submit" class="w-full rounded-[6px] bg-mora-accent px-6 py-4 text-sm font-bold uppercase tracking-wide text-black transition hover:bg-mora-accent-hover">
-                    Resend Verification Email
+                    إعادة إرسال رسالة التفعيل
                 </button>
             </form>
 
@@ -47,7 +47,7 @@
                 @csrf
 
                 <button type="submit" class="text-xs font-semibold uppercase tracking-wide text-mora-muted transition hover:text-mora-accent">
-                    Sign Out
+                    تسجيل الخروج
                 </button>
             </form>
 

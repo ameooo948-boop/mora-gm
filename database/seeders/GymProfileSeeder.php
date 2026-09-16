@@ -13,19 +13,19 @@ class GymProfileSeeder extends Seeder
 
         GymProfile::create([
             'name' => 'MORA GYM',
-            'eyebrow' => 'ABOUT MORA',
+            'eyebrow' => 'عن MORA',
 
-            'about_title' => 'More Than A Gym.',
+            'about_title' => 'أكثر من مجرد جيم.',
 
-            'about_description' => 'MORA is a focused training space built for people who want to train consistently, improve their strength, and become better every day.',
+            'about_description' => 'MORA مساحة تدريب متخصصة صُممت لمن يريدون التدريب باستمرار، وتطوير قوتهم، وأن يصبحوا أفضل كل يوم.',
 
-            'mission_title' => 'Our Mission',
+            'mission_title' => 'رسالتنا',
 
-            'mission' => 'To provide a focused, comfortable, and motivating environment where every member can train with purpose and stay consistent.',
+            'mission' => 'توفير بيئة تدريبية مريحة ومحفزة ومركزة، تتيح لكل عضو التدريب بهدف والحفاظ على الاستمرارية.',
 
-            'vision_title' => 'Our Vision',
+            'vision_title' => 'رؤيتنا',
 
-            'vision' => 'To build a strong local fitness community based on discipline, consistency, and real progress.',
+            'vision' => 'بناء مجتمع لياقة بدنية قوي يقوم على الانضباط والاستمرارية والتقدم الحقيقي.',
 
             'image' => 'about/mora-gym.webp',
 
@@ -38,7 +38,7 @@ class GymProfileSeeder extends Seeder
             'phone' => '01063950691',
             'whatsapp' => '01063950691',
             'email' => 'amrwael105@gmail.com',
-            'address' => 'Dakahlia, Nabrooh, Al-Daroutain',
+            'address' => 'الدقهلية، نبروه، الدروتين',
             'instagram_url' => null,
         ]);
     }

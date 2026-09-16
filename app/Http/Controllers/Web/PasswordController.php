@@ -36,7 +36,7 @@ class PasswordController extends Controller
 
         return back()->with(
             'success',
-            'We have emailed you a password reset link.'
+            'تم إرسال رابط إعادة تعيين كلمة المرور إلى بريدك الإلكتروني.'
         );
     }
 
@@ -87,7 +87,7 @@ class PasswordController extends Controller
             ->route('login')
             ->with(
                 'success',
-                'Your password has been reset successfully.'
+                'تمت إعادة تعيين كلمة المرور بنجاح.'
             );
     }
 }

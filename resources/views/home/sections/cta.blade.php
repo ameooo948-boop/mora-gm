@@ -7,7 +7,7 @@
 
             <div class="relative z-10 max-w-4xl">
                 <p class="mb-5 text-xs font-bold uppercase tracking-[0.3em] text-mora-accent">
-                    YOUR NEXT STEP STARTS HERE.
+                    خطوتك التالية تبدأ هنا.
                 </p>
 
                 <h2 class="font-display text-5xl font-semibold uppercase leading-[0.9] tracking-tight text-mora-text sm:text-6xl md:text-7xl lg:text-8xl">
@@ -28,7 +28,7 @@
                     </a>
 
                     <a href="#memberships" class="inline-flex items-center justify-center rounded-[6px] border border-mora-border px-7 py-4 text-sm font-bold uppercase tracking-wide text-mora-text transition hover:border-mora-accent hover:text-mora-accent">
-                        View Memberships
+                        عرض العضويات
                     </a>
 
                 </div>

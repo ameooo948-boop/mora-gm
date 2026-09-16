@@ -2,8 +2,8 @@
 
 namespace App\Repositories\Eloquent;
 
-use App\Repositories\Contracts\GalleryItemRepositoryInterface;
 use App\Models\GalleryItem;
+use App\Repositories\Contracts\GalleryItemRepositoryInterface;
 use Illuminate\Support\Collection;
 
 class GalleryItemRepository implements GalleryItemRepositoryInterface
