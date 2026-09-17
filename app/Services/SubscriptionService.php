@@ -92,4 +92,21 @@ class SubscriptionService
     {
         return $this->repository->countActive();
     }
+
+    public function getAllSubscriptions(
+        ?string $status = null,
+        ?string $search = null,
+        int $perPage = 15
+    ): LengthAwarePaginator {
+        return $this->repository->getAll(
+            $status,
+            $search,
+            $perPage
+        );
+    }
+
+    public function getSubscription(int $id): ?Subscription
+    {
+        return $this->repository->findById($id);
+    }
 }

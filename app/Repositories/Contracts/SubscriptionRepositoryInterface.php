@@ -26,4 +26,12 @@ interface SubscriptionRepositoryInterface
     public function hasActiveByUser(int $userId): bool;
 
     public function countActive(): int;
+
+    public function getAll(
+        ?string $status = null,
+        ?string $search = null,
+        int $perPage = 15
+    ): LengthAwarePaginator;
+
+    public function findById(int $id): ?Subscription;
 }

@@ -119,6 +119,16 @@
                     </p>
                 </a>
 
+                <a href="{{ route('admin.subscriptions.index') }}" class="border border-mora-border bg-mora-card p-6 transition hover:border-mora-accent">
+                    <h3 class="font-display text-xl font-semibold text-mora-text">
+                        الاشتراكات
+                    </h3>
+
+                    <p class="mt-2 text-sm leading-6 text-mora-muted">
+                        متابعة جميع اشتراكات أعضاء MORA وحالاتها.
+                    </p>
+                </a>
+
                 <a href="{{ route('home') }}#memberships" class="border border-mora-border bg-mora-card p-6 transition hover:border-mora-accent">
                     <h3 class="font-display text-xl font-semibold text-mora-text">
                         الباقات

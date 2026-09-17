@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\Admin\MemberController;
 use App\Http\Controllers\Admin\PaymentController as AdminPaymentController;
+use App\Http\Controllers\Admin\SubscriptionController as AdminSubscriptionController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Member\AttendanceController;
 use App\Http\Controllers\Member\DashboardController as MemberDashboardController;
@@ -106,6 +107,16 @@ Route::middleware(['auth', 'role:admin'])
             MemberController::class,
             'show',
         ])->name('members.show');
+
+        Route::get('/subscriptions', [
+            AdminSubscriptionController::class,
+            'index',
+        ])->name('subscriptions.index');
+
+        Route::get('/subscriptions/{subscription}', [
+            AdminSubscriptionController::class,
+            'show',
+        ])->name('subscriptions.show');
     });
 
 Route::middleware('auth')->group(function () {

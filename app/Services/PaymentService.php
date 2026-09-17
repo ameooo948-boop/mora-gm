@@ -119,6 +119,12 @@ class PaymentService
                 ]);
             }
 
+            if (! $payment->transaction_reference) {
+                throw ValidationException::withMessages([
+                    'payment' => 'لا يمكن تأكيد عملية دفع لم يتم إرسال رقم العملية الخاص بها.',
+                ]);
+            }
+
             $subscription = $payment->subscription;
 
             if (

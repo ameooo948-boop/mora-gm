@@ -87,4 +87,46 @@ class SubscriptionRepository implements SubscriptionRepositoryInterface
             ->where('ends_at', '>', now())
             ->count();
     }
+
+    public function getAll(
+        ?string $status = null,
+        ?string $search = null,
+        int $perPage = 15
+    ): LengthAwarePaginator {
+        return $this->model
+            ->newQuery()
+            ->with([
+                'user',
+                'membershipPlan',
+                'payment',
+            ])
+            ->when($status, function ($query) use ($status) {
+                $query->where('status', $status);
+            })
+            ->when($search, function ($query) use ($search) {
+                $query->whereHas('user', function ($query) use ($search) {
+                    $query->where(function ($query) use ($search) {
+                        $query
+                            ->where('name', 'like', "%{$search}%")
+                            ->orWhere('email', 'like', "%{$search}%")
+                            ->orWhere('phone', 'like', "%{$search}%");
+                    });
+                });
+            })
+            ->latest()
+            ->paginate($perPage)
+            ->withQueryString();
+    }
+
+    public function findById(int $id): ?Subscription
+    {
+        return $this->model
+            ->newQuery()
+            ->with([
+                'user',
+                'membershipPlan',
+                'payment',
+            ])
+            ->find($id);
+    }
 }

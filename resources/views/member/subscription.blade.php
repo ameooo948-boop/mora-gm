@@ -81,7 +81,6 @@
 
                 </p>
 
-
                 <div class="bg-mora-card p-6">
                     <p class="text-sm text-mora-muted">
                         المدة المتبقية
@@ -163,6 +162,31 @@
                             في انتظار تأكيد الدفع
                             @endif
                         </p>
+
+                        @if (
+                        $subscription->status->value === 'cancelled'
+                        && $subscription->payment
+                        && $subscription->payment->status->value === 'rejected'
+                        )
+                        <div class="mt-4 border border-red-500/20 bg-red-500/5 p-4">
+
+                            <p class="text-xs font-semibold text-red-400">
+                                تم رفض عملية الدفع
+                            </p>
+
+                            @if ($subscription->payment->notes)
+                            <p class="mt-2 text-xs leading-6 text-mora-muted">
+                                {{ $subscription->payment->notes }}
+                            </p>
+                            @endif
+
+                            <a href="{{ route('home') }}#memberships" class="mt-4 inline-flex rounded-md bg-mora-accent px-4 py-2 text-xs font-bold text-mora-bg transition hover:bg-mora-accent-hover">
+                                اختيار باقة جديدة
+                            </a>
+
+                        </div>
+                        @endif
+
                     </div>
 
 
