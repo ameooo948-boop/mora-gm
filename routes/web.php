@@ -1,12 +1,14 @@
 <?php
 
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
+use App\Http\Controllers\Admin\MemberController;
 use App\Http\Controllers\Admin\PaymentController as AdminPaymentController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Member\AttendanceController;
 use App\Http\Controllers\Member\DashboardController as MemberDashboardController;
 use App\Http\Controllers\Member\MembershipController;
 use App\Http\Controllers\Member\PaymentController;
+use App\Http\Controllers\Member\ProfileController;
 use App\Http\Controllers\Member\SubscriptionController;
 use App\Http\Controllers\Web\AuthController;
 use App\Http\Controllers\Web\PasswordController;
@@ -94,6 +96,16 @@ Route::middleware(['auth', 'role:admin'])
             AttendanceController::class,
             'index',
         ])->name('attendance.index');
+
+        Route::get('/members', [
+            MemberController::class,
+            'index',
+        ])->name('members.index');
+
+        Route::get('/members/{member}', [
+            MemberController::class,
+            'show',
+        ])->name('members.show');
     });
 
 Route::middleware('auth')->group(function () {
@@ -175,4 +187,14 @@ Route::middleware(['auth', 'verified', 'role:member'])
             AttendanceController::class,
             'checkOut',
         ])->name('attendance.check-out');
+
+        Route::get('/profile', [
+            ProfileController::class,
+            'edit',
+        ])->name('profile');
+
+        Route::put('/profile', [
+            ProfileController::class,
+            'update',
+        ])->name('profile.update');
     });

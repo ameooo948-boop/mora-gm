@@ -237,4 +237,9 @@ class AttendanceService
             ]);
         }
     }
+
+    public function countToday(): int
+    {
+        return $this->repository->countToday();
+    }
 }

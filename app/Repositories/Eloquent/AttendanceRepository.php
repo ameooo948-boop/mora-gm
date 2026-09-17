@@ -67,4 +67,12 @@ class AttendanceRepository implements AttendanceRepositoryInterface
             ->latest('checked_in_at')
             ->paginate($perPage);
     }
+
+    public function countToday(): int
+    {
+        return $this->model
+            ->newQuery()
+            ->whereDate('attendance_date', today())
+            ->count();
+    }
 }

@@ -4,6 +4,7 @@ namespace App\Repositories\Eloquent;
 
 use App\Models\User;
 use App\Repositories\Contracts\UserRepositoryInterface;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 
 class UserRepository implements UserRepositoryInterface
 {
@@ -29,5 +30,66 @@ class UserRepository implements UserRepositoryInterface
         return $this->model
             ->newQuery()
             ->find($id);
+    }
+
+    public function countMembers(): int
+    {
+        return $this->model
+            ->newQuery()
+            ->where('role', 'member')
+            ->count();
+    }
+
+    public function countActiveMembers(): int
+    {
+        return $this->model
+            ->newQuery()
+            ->where('role', 'member')
+            ->whereHas('activeSubscription')
+            ->count();
+    }
+
+    public function getMembers(
+        ?string $search = null,
+        int $perPage = 15
+    ): LengthAwarePaginator {
+        return $this->model
+            ->newQuery()
+            ->with('activeSubscription.membershipPlan')
+            ->where('role', 'member')
+            ->when($search, function ($query) use ($search) {
+                $query->where(function ($query) use ($search) {
+                    $query
+                        ->where('name', 'like', "%{$search}%")
+                        ->orWhere('email', 'like', "%{$search}%")
+                        ->orWhere('phone', 'like', "%{$search}%");
+                });
+            })
+            ->latest()
+            ->paginate($perPage)
+            ->withQueryString();
+    }
+
+    public function findMemberById(int $id): ?User
+    {
+        return $this->model
+            ->newQuery()
+            ->with([
+                'activeSubscription.membershipPlan',
+                'subscriptions.membershipPlan',
+                'attendances.trainingSession',
+                'payments.subscription.membershipPlan',
+            ])
+            ->where('role', 'member')
+            ->find($id);
+    }
+
+    public function updateProfile(
+        User $user,
+        array $data
+    ): User {
+        $user->update($data);
+
+        return $user->fresh();
     }
 }

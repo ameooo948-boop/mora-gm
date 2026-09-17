@@ -2,309 +2,284 @@
 
 @section('content')
 
-<section class="min-h-screen bg-mora-bg px-5 pb-20 pt-32">
+<section class="min-h-screen bg-mora-bg py-24">
+    <div class="mx-auto max-w-7xl px-5">
 
-    <div class="mx-auto max-w-7xl">
-
-        {{-- Header --}}
-        <div class="mb-10">
-
-            <p class="mb-3 text-sm font-semibold tracking-[0.2em] text-mora-accent">
-                لوحة التحكم
+        <div class="mb-12">
+            <p class="mb-3 text-xs font-semibold uppercase tracking-[0.25em] text-mora-accent">
+                MORA GYM
             </p>
 
-            <div class="flex flex-col justify-between gap-5 md:flex-row md:items-end">
+            <h1 class="font-display text-4xl font-bold text-mora-text md:text-5xl">
+                أهلًا، {{ $user->name }}
+            </h1>
 
-                <div>
-                    <h1 class="font-display text-5xl font-bold text-mora-text md:text-6xl">
-                        أهلاً بك، {{ $user->name }}
-                    </h1>
-
-                    <p class="mt-3 text-mora-muted">
-                        تابع عضويتك وحضورك وكل ما يتعلق برحلتك في MORA.
-                    </p>
-                </div>
-
-                <a href="{{ route('member.subscription') }}" class="inline-flex w-fit items-center justify-center rounded-md bg-mora-accent px-6 py-3 font-semibold text-mora-bg transition hover:bg-mora-accent-hover">
-                    عرض عضويتي
-                </a>
-
-            </div>
-
+            <p class="mt-4 text-sm text-mora-muted">
+                تابع عضويتك وحضورك وعمليات الدفع من لوحة التحكم الخاصة بك.
+            </p>
         </div>
 
+        {{-- Membership --}}
+        <div class="mb-8 border border-mora-border bg-mora-card p-6 md:p-8">
 
-        {{-- Membership Status --}}
-        @if ($activeSubscription)
-
-        <div class="mb-8 overflow-hidden rounded-xl border border-mora-border bg-mora-card">
-
-            <div class="flex flex-col justify-between gap-6 p-6 md:flex-row md:items-center md:p-8">
+            <div class="flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
 
                 <div>
+                    <p class="text-xs uppercase tracking-[0.2em] text-mora-muted">
+                        العضوية الحالية
+                    </p>
 
-                    <div class="mb-3 flex items-center gap-3">
+                    @if ($activeSubscription)
 
-                        <span class="h-2.5 w-2.5 rounded-full bg-mora-accent"></span>
-
-                        <span class="text-sm font-semibold text-mora-accent">
-                            عضويتك فعالة
-                        </span>
-
-                    </div>
-
-                    <h2 class="font-display text-4xl font-bold text-mora-text">
+                    <h2 class="mt-2 font-display text-3xl font-semibold text-mora-text">
                         {{ $activeSubscription->membershipPlan->name }}
                     </h2>
 
-                    <p class="mt-2 text-mora-muted">
-                        عضويتك مستمرة حتى
-                        {{ $activeSubscription->ends_at->format('d/m/Y') }}
+                    <p class="mt-2 text-sm text-mora-muted">
+                        تنتهي في
+                        {{ $activeSubscription->ends_at?->format('d/m/Y') ?? '—' }}
                     </p>
 
+                    @else
+
+                    <h2 class="mt-2 font-display text-2xl font-semibold text-mora-text">
+                        لا توجد عضوية فعالة
+                    </h2>
+
+                    <p class="mt-2 text-sm text-mora-muted">
+                        اختر الباقة المناسبة لك وابدأ رحلتك مع MORA.
+                    </p>
+
+                    @endif
                 </div>
 
+                <div>
+                    @if ($activeSubscription)
 
-                <div class="grid grid-cols-2 gap-4 sm:grid-cols-3">
+                    <span class="inline-flex border border-mora-accent/30 px-4 py-2 text-sm font-semibold text-mora-accent">
+                        عضوية فعالة
+                    </span>
 
-                    <div class="min-w-[120px] border-l border-mora-border px-4">
-                        <p class="text-sm text-mora-muted">
-                            القيمة
-                        </p>
+                    @else
 
-                        <p class="mt-2 font-display text-2xl font-bold text-mora-text">
-                            {{ number_format((float) $activeSubscription->price, 0) }}
-                            <span class="text-xs font-normal text-mora-muted">
-                                جنيه
-                            </span>
-                        </p>
-                    </div>
+                    <a href="{{ route('home') }}#memberships" class="inline-flex rounded-md bg-mora-accent px-5 py-3 text-sm font-bold text-mora-bg transition hover:bg-mora-accent-hover">
+                        عرض الباقات
+                    </a>
 
-
-                    <div class="min-w-[120px] border-l border-mora-border px-4">
-                        <p class="text-sm text-mora-muted">
-                            البداية
-                        </p>
-
-                        <p class="mt-2 font-semibold text-mora-text">
-                            {{ $activeSubscription->starts_at->format('d/m/Y') }}
-                        </p>
-                    </div>
-
-
-                    <div class="min-w-[120px] px-4">
-                        <p class="text-sm text-mora-muted">
-                            المتبقي
-                        </p>
-
-                        <p class="mt-2 font-display text-2xl font-bold text-mora-accent">
-                            {{ max(0, now()->diffInDays($activeSubscription->ends_at, false)) }}
-                            <span class="text-xs font-normal text-mora-muted">
-                                يوم
-                            </span>
-                        </p>
-                    </div>
-
+                    @endif
                 </div>
 
             </div>
 
+            @if ($activeSubscription)
+
+            <div class="mt-8 grid gap-4 border-t border-mora-border pt-8 sm:grid-cols-3">
+
+                <div>
+                    <p class="text-xs text-mora-muted">
+                        سعر الباقة
+                    </p>
+
+                    <p class="mt-2 font-display text-2xl text-mora-text">
+                        {{ number_format((float) $activeSubscription->price, 0) }}
+                        <span class="text-sm text-mora-muted">جنيه</span>
+                    </p>
+                </div>
+
+                <div>
+                    <p class="text-xs text-mora-muted">
+                        بداية العضوية
+                    </p>
+
+                    <p class="mt-2 text-sm text-mora-text">
+                        {{ $activeSubscription->starts_at?->format('d/m/Y') ?? '—' }}
+                    </p>
+                </div>
+
+                <div>
+                    <p class="text-xs text-mora-muted">
+                        الأيام المتبقية
+                    </p>
+
+                    <p class="mt-2 font-display text-2xl text-mora-accent">
+                        {{ $activeSubscription->ends_at
+                                ? max(0, now()->diffInDays($activeSubscription->ends_at, false))
+                                : 0
+                            }}
+                    </p>
+                </div>
+
+            </div>
+
+            @endif
+
         </div>
 
-        @else
+        {{-- Quick Actions --}}
+        <div class="mb-12 grid gap-4 sm:grid-cols-3">
 
-        <div class="mb-8 rounded-xl border border-mora-border bg-mora-card p-8">
+            <a href="{{ route('member.subscription') }}" class="border border-mora-border bg-mora-card p-6 transition hover:border-mora-accent">
+                <p class="text-xs text-mora-muted">
+                    الحساب
+                </p>
 
-            <p class="text-sm font-semibold text-mora-accent">
-                العضوية
-            </p>
+                <h3 class="mt-2 font-display text-xl font-semibold text-mora-text">
+                    عضويتي
+                </h3>
 
-            <h2 class="mt-2 font-display text-3xl font-bold text-mora-text">
-                لا يوجد اشتراك فعال
-            </h2>
+                <p class="mt-2 text-sm text-mora-muted">
+                    عرض تفاصيل العضوية والاشتراكات السابقة.
+                </p>
+            </a>
 
-            <p class="mt-2 max-w-xl text-mora-muted">
-                اختر إحدى عضويات MORA وابدأ رحلتك التدريبية معنا.
-            </p>
+            <a href="{{ route('member.attendance') }}" class="border border-mora-border bg-mora-card p-6 transition hover:border-mora-accent">
+                <p class="text-xs text-mora-muted">
+                    المتابعة
+                </p>
 
-            <a href="{{ route('home') }}#memberships" class="mt-6 inline-flex rounded-md bg-mora-accent px-5 py-3 font-semibold text-mora-bg transition hover:bg-mora-accent-hover">
-                استعرض العضويات
+                <h3 class="mt-2 font-display text-xl font-semibold text-mora-text">
+                    الحضور
+                </h3>
+
+                <p class="mt-2 text-sm text-mora-muted">
+                    تسجيل الحضور والانصراف ومراجعة السجل.
+                </p>
+            </a>
+
+            <a href="{{ route('home') }}#memberships" class="border border-mora-border bg-mora-card p-6 transition hover:border-mora-accent">
+                <p class="text-xs text-mora-muted">
+                    العضويات
+                </p>
+
+                <h3 class="mt-2 font-display text-xl font-semibold text-mora-text">
+                    الباقات
+                </h3>
+
+                <p class="mt-2 text-sm text-mora-muted">
+                    تعرف على باقات عضوية MORA المتاحة.
+                </p>
             </a>
 
         </div>
 
-        @endif
+        {{-- Recent Attendance --}}
+        <div class="mb-12">
 
-
-        {{-- Quick Actions --}}
-        <div class="mb-10">
-
-            <h2 class="mb-5 font-display text-3xl font-bold text-mora-text">
-                الوصول السريع
-            </h2>
-
-            <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-
-                <a href="{{ route('member.subscription') }}" class="group rounded-xl border border-mora-border bg-mora-card p-6 transition hover:border-mora-accent">
-                    <span class="text-sm text-mora-accent">
-                        01
-                    </span>
-
-                    <h3 class="mt-5 font-display text-2xl font-bold text-mora-text">
-                        عضويتي
-                    </h3>
-
-                    <p class="mt-2 text-sm text-mora-muted">
-                        تفاصيل العضوية والاشتراكات السابقة.
+            <div class="mb-6 flex items-end justify-between">
+                <div>
+                    <p class="text-xs uppercase tracking-[0.2em] text-mora-muted">
+                        آخر الزيارات
                     </p>
+
+                    <h2 class="mt-2 font-display text-2xl font-semibold text-mora-text">
+                        آخر الحضور
+                    </h2>
+                </div>
+
+                <a href="{{ route('member.attendance') }}" class="text-xs font-semibold text-mora-accent hover:underline">
+                    عرض الكل
                 </a>
+            </div>
 
+            <div class="border border-mora-border bg-mora-card">
 
-                <div class="rounded-xl border border-mora-border bg-mora-card p-6">
+                @forelse ($recentAttendances as $attendance)
 
-                    <span class="text-sm text-mora-accent">
-                        02
-                    </span>
+                <div class="flex flex-col gap-3 border-b border-mora-border p-5 last:border-b-0 sm:flex-row sm:items-center sm:justify-between">
 
-                    <h3 class="mt-5 font-display text-2xl font-bold text-mora-text">
-                        الحضور
-                    </h3>
+                    <div>
+                        <p class="font-semibold text-mora-text">
+                            {{ $attendance->trainingSession->name }}
+                        </p>
 
-                    <p class="mt-2 text-sm text-mora-muted">
-                        سجل حضورك في MORA.
-                    </p>
+                        <p class="mt-1 text-xs text-mora-muted">
+                            {{ $attendance->attendance_date->format('d/m/Y') }}
+                        </p>
+                    </div>
 
-                    <span class="mt-4 inline-block text-xs text-mora-muted">
-                        قريبًا
-                    </span>
+                    <div class="text-xs text-mora-muted">
+                        حضور:
+                        <span class="text-mora-text">
+                            {{ $attendance->checked_in_at?->format('h:i A') ?? '—' }}
+                        </span>
 
-                </div>
+                        <span class="mx-2">•</span>
 
-
-                <div class="rounded-xl border border-mora-border bg-mora-card p-6">
-
-                    <span class="text-sm text-mora-accent">
-                        03
-                    </span>
-
-                    <h3 class="mt-5 font-display text-2xl font-bold text-mora-text">
-                        الملف الشخصي
-                    </h3>
-
-                    <p class="mt-2 text-sm text-mora-muted">
-                        إدارة بيانات حسابك الشخصية.
-                    </p>
-
-                    <span class="mt-4 inline-block text-xs text-mora-muted">
-                        قريبًا
-                    </span>
+                        انصراف:
+                        <span class="text-mora-text">
+                            {{ $attendance->checked_out_at?->format('h:i A') ?? 'لم يسجل' }}
+                        </span>
+                    </div>
 
                 </div>
 
+                @empty
 
-                <div class="rounded-xl border border-mora-border bg-mora-card p-6">
-
-                    <span class="text-sm text-mora-accent">
-                        04
-                    </span>
-
-                    <h3 class="mt-5 font-display text-2xl font-bold text-mora-text">
-                        الإشعارات
-                    </h3>
-
-                    <p class="mt-2 text-sm text-mora-muted">
-                        آخر التنبيهات والتحديثات الخاصة بك.
-                    </p>
-
-                    <span class="mt-4 inline-block text-xs text-mora-muted">
-                        قريبًا
-                    </span>
-
+                <div class="p-8 text-center text-sm text-mora-muted">
+                    لا توجد سجلات حضور حتى الآن.
                 </div>
+
+                @endforelse
 
             </div>
 
         </div>
 
-
-        {{-- Recent Subscriptions --}}
+        {{-- Recent Payments --}}
         <div>
 
-            <div class="mb-5 flex items-end justify-between gap-4">
-
+            <div class="mb-6 flex items-end justify-between">
                 <div>
-                    <h2 class="font-display text-3xl font-bold text-mora-text">
-                        آخر الاشتراكات
-                    </h2>
-
-                    <p class="mt-2 text-mora-muted">
-                        أحدث اشتراكاتك في MORA.
+                    <p class="text-xs uppercase tracking-[0.2em] text-mora-muted">
+                        العمليات المالية
                     </p>
+
+                    <h2 class="mt-2 font-display text-2xl font-semibold text-mora-text">
+                        آخر عمليات الدفع
+                    </h2>
                 </div>
-
-                <a href="{{ route('member.subscription') }}" class="text-sm font-semibold text-mora-accent transition hover:text-mora-accent-hover">
-                    عرض الكل
-                </a>
-
             </div>
 
+            <div class="border border-mora-border bg-mora-card">
 
-            <div class="overflow-hidden rounded-xl border border-mora-border bg-mora-card">
+                @forelse ($recentPayments as $payment)
 
-                @forelse ($subscriptions as $subscription)
-
-                <div class="flex flex-col gap-4 border-b border-mora-border p-6 last:border-b-0 sm:flex-row sm:items-center sm:justify-between">
+                <div class="flex flex-col gap-3 border-b border-mora-border p-5 last:border-b-0 sm:flex-row sm:items-center sm:justify-between">
 
                     <div>
-
-                        <h3 class="font-semibold text-mora-text">
-                            {{ $subscription->membershipPlan->name }}
-                        </h3>
-
-                        <p class="mt-1 text-sm text-mora-muted">
-                            @if ($subscription->starts_at && $subscription->ends_at)
-                            {{ $subscription->starts_at->format('d/m/Y') }}
-                            -
-                            {{ $subscription->ends_at->format('d/m/Y') }}
-                            @else
-                            في انتظار تأكيد الدفع
-                            @endif
+                        <p class="font-semibold text-mora-text">
+                            {{ $payment->subscription->membershipPlan->name }}
                         </p>
 
+                        <p class="mt-1 text-xs text-mora-muted">
+                            {{ $payment->created_at->format('d/m/Y') }}
+                        </p>
                     </div>
 
+                    <div class="flex items-center gap-4">
 
-                    <div class="flex items-center gap-5">
-
-                        <span class="font-semibold text-mora-text">
-                            {{ number_format((float) $subscription->price, 0) }}
+                        <span class="font-display text-lg text-mora-text">
+                            {{ number_format((float) $payment->amount, 0) }}
                             جنيه
                         </span>
 
+                        @switch($payment->status->value)
 
-                        @switch($subscription->status->value)
-
-                        @case('active')
-                        <span class="rounded-full bg-mora-accent/10 px-3 py-1.5 text-xs font-semibold text-mora-accent">
-                            فعال
+                        @case('paid')
+                        <span class="border border-mora-accent/30 px-3 py-1 text-xs text-mora-accent">
+                            مكتملة
                         </span>
                         @break
 
-                        @case('expired')
-                        <span class="rounded-full bg-white/5 px-3 py-1.5 text-xs font-semibold text-mora-muted">
-                            منتهي
-                        </span>
-                        @break
-
-                        @case('cancelled')
-                        <span class="rounded-full bg-red-500/10 px-3 py-1.5 text-xs font-semibold text-red-400">
-                            ملغي
+                        @case('rejected')
+                        <span class="border border-red-500/30 px-3 py-1 text-xs text-red-400">
+                            مرفوضة
                         </span>
                         @break
 
                         @default
-                        <span class="rounded-full bg-yellow-500/10 px-3 py-1.5 text-xs font-semibold text-yellow-400">
-                            قيد الانتظار
+                        <span class="border border-yellow-500/30 px-3 py-1 text-xs text-yellow-400">
+                            قيد المراجعة
                         </span>
 
                         @endswitch
@@ -315,12 +290,8 @@
 
                 @empty
 
-                <div class="p-8 text-center">
-
-                    <p class="text-mora-muted">
-                        لا توجد اشتراكات حتى الآن.
-                    </p>
-
+                <div class="p-8 text-center text-sm text-mora-muted">
+                    لا توجد عمليات دفع حتى الآن.
                 </div>
 
                 @endforelse
@@ -330,7 +301,6 @@
         </div>
 
     </div>
-
 </section>
 
 @endsection

@@ -87,4 +87,9 @@ class SubscriptionService
     {
         return $this->repository->hasActiveByUser($userId);
     }
+
+    public function countActiveSubscriptions(): int
+    {
+        return $this->repository->countActive();
+    }
 }

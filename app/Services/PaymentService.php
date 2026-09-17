@@ -198,4 +198,9 @@ class PaymentService
             ]);
         });
     }
+
+    public function countPendingPayments(): int
+    {
+        return $this->repository->countPending();
+    }
 }

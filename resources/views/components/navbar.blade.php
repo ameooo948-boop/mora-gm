@@ -31,6 +31,10 @@
                 الرئيسية
             </a>
 
+            <a href="{{ route('member.profile') }}" class="transition hover:text-mora-accent">
+                الملف الشخصي
+            </a>
+
             <a href="{{ route('member.attendance') }}" class="transition hover:text-mora-accent">
                 الحضور
             </a>

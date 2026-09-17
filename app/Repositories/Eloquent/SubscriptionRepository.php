@@ -78,4 +78,13 @@ class SubscriptionRepository implements SubscriptionRepositoryInterface
             ->where('ends_at', '>', now())
             ->exists();
     }
+
+    public function countActive(): int
+    {
+        return $this->model
+            ->newQuery()
+            ->where('status', 'active')
+            ->where('ends_at', '>', now())
+            ->count();
+    }
 }

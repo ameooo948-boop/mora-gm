@@ -3,28 +3,23 @@
 namespace App\Http\Controllers\Member;
 
 use App\Http\Controllers\Controller;
-use App\Services\SubscriptionService;
-use Illuminate\Contracts\View\View;
+use App\Services\MemberDashboardService;
 use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 class DashboardController extends Controller
 {
     public function __construct(
-        protected SubscriptionService $subscriptionService
+        protected MemberDashboardService $dashboardService
     ) {}
 
     public function index(Request $request): View
     {
-        $user = $request->user();
-
         return view('member.dashboard', [
-            'user' => $user,
-
-            'activeSubscription' => $this->subscriptionService
-                ->getActiveSubscription($user->id),
-
-            'subscriptions' => $this->subscriptionService
-                ->getUserSubscriptions($user->id, 5),
+            'user' => $request->user(),
+            ...$this->dashboardService->getDashboardData(
+                $request->user()
+            ),
         ]);
     }
 }

@@ -94,4 +94,13 @@ class PaymentRepository implements PaymentRepositoryInterface
             ->latest()
             ->paginate($perPage);
     }
+
+    public function countPending(): int
+    {
+        return $this->model
+            ->newQuery()
+            ->where('status', 'pending')
+            ->whereNotNull('transaction_reference')
+            ->count();
+    }
 }

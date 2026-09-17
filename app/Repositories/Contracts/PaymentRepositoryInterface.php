@@ -33,4 +33,6 @@ interface PaymentRepositoryInterface
     public function getAll(
         int $perPage = 15
     ): LengthAwarePaginator;
+
+    public function countPending(): int;
 }

@@ -24,4 +24,6 @@ interface SubscriptionRepositoryInterface
     public function findPendingByUser(int $userId): ?Subscription;
 
     public function hasActiveByUser(int $userId): bool;
+
+    public function countActive(): int;
 }

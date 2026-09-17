@@ -28,4 +28,6 @@ interface AttendanceRepositoryInterface
     public function getAll(
         int $perPage = 15
     ): LengthAwarePaginator;
+
+    public function countToday(): int;
 }
