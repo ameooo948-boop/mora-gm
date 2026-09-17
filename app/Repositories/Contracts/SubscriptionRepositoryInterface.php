@@ -20,4 +20,8 @@ interface SubscriptionRepositoryInterface
         Subscription $subscription,
         array $data
     ): Subscription;
+
+    public function findPendingByUser(int $userId): ?Subscription;
+
+    public function hasActiveByUser(int $userId): bool;
 }

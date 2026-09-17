@@ -82,4 +82,9 @@ class SubscriptionService
     ): ?Subscription {
         return $this->repository->findPendingByUser($userId);
     }
+
+    public function hasActiveSubscription(int $userId): bool
+    {
+        return $this->repository->hasActiveByUser($userId);
+    }
 }

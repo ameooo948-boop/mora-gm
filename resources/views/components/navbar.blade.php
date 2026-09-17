@@ -31,6 +31,10 @@
                 الرئيسية
             </a>
 
+            <a href="{{ route('member.attendance') }}" class="transition hover:text-mora-accent">
+                الحضور
+            </a>
+
             <a href="#about" class="text-sm font-medium text-mora-muted transition hover:text-mora-accent">
                 عن MORA
             </a>

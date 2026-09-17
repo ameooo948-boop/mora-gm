@@ -2,7 +2,9 @@
 
 namespace App\Http\Requests\Auth;
 
+use App\Enums\Gender;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class RegisterRequest extends FormRequest
 {
@@ -26,6 +28,11 @@ class RegisterRequest extends FormRequest
                 'email',
                 'max:255',
                 'unique:users,email',
+            ],
+
+            'gender' => [
+                'required',
+                Rule::enum(Gender::class),
             ],
 
             'phone' => [

@@ -1,9 +1,10 @@
 <?php
 
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
-use App\Http\Controllers\HomeController;
-use App\Http\Controllers\Member\DashboardController as MemberDashboardController;
 use App\Http\Controllers\Admin\PaymentController as AdminPaymentController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\Member\AttendanceController;
+use App\Http\Controllers\Member\DashboardController as MemberDashboardController;
 use App\Http\Controllers\Member\MembershipController;
 use App\Http\Controllers\Member\PaymentController;
 use App\Http\Controllers\Member\SubscriptionController;
@@ -88,6 +89,11 @@ Route::middleware(['auth', 'role:admin'])
             AdminPaymentController::class,
             'reject',
         ])->name('payments.reject');
+
+        Route::get('/attendance', [
+            AttendanceController::class,
+            'index',
+        ])->name('attendance.index');
     });
 
 Route::middleware('auth')->group(function () {
@@ -154,4 +160,19 @@ Route::middleware(['auth', 'verified', 'role:member'])
             MembershipController::class,
             'subscribe',
         ])->name('membership.subscribe');
+
+        Route::get('/attendance', [
+            AttendanceController::class,
+            'index',
+        ])->name('attendance');
+
+        Route::post('/attendance/{trainingSession}/check-in', [
+            AttendanceController::class,
+            'checkIn',
+        ])->name('attendance.check-in');
+
+        Route::post('/attendance/{trainingSession}/check-out', [
+            AttendanceController::class,
+            'checkOut',
+        ])->name('attendance.check-out');
     });

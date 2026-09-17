@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Repositories\Contracts\AttendanceRepositoryInterface;
 use App\Repositories\Contracts\GalleryItemRepositoryInterface;
 use App\Repositories\Contracts\GymProfileRepositoryInterface;
 use App\Repositories\Contracts\MembershipPlanRepositoryInterface;
@@ -10,6 +11,7 @@ use App\Repositories\Contracts\SubscriptionRepositoryInterface;
 use App\Repositories\Contracts\TrainerRepositoryInterface;
 use App\Repositories\Contracts\TrainingSessionRepositoryInterface;
 use App\Repositories\Contracts\UserRepositoryInterface as ContractsUserRepositoryInterface;
+use App\Repositories\Eloquent\AttendanceRepository;
 use App\Repositories\Eloquent\GalleryItemRepository;
 use App\Repositories\Eloquent\GymProfileRepository;
 use App\Repositories\Eloquent\MembershipPlanRepository;
@@ -62,6 +64,11 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(
             PaymentRepositoryInterface::class,
             PaymentRepository::class
+        );
+
+        $this->app->bind(
+            AttendanceRepositoryInterface::class,
+            AttendanceRepository::class
         );
     }
 

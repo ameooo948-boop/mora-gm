@@ -78,6 +78,30 @@
 
                 </div>
 
+                <div>
+                    <label for="gender" class="mb-2 block text-sm font-medium text-mora-text">
+                        النوع
+                    </label>
+
+                    <select id="gender" name="gender" required class="w-full rounded-md border border-mora-border bg-mora-surface px-4 py-3 text-sm text-mora-text outline-none transition focus:border-mora-accent">
+                        <option value="">اختر النوع</option>
+
+                        <option value="male" @selected(old('gender')==='male' )>
+                            ذكر
+                        </option>
+
+                        <option value="female" @selected(old('gender')==='female' )>
+                            أنثى
+                        </option>
+                    </select>
+
+                    @error('gender')
+                    <p class="mt-2 text-xs text-red-400">
+                        {{ $message }}
+                    </p>
+                    @enderror
+                </div>
+
 
                 <div>
                     <label for="password" class="mb-2 block text-xs font-bold uppercase tracking-[0.15em]">

@@ -68,4 +68,14 @@ class SubscriptionRepository implements SubscriptionRepositoryInterface
             ->latest()
             ->first();
     }
+
+    public function hasActiveByUser(int $userId): bool
+    {
+        return $this->model
+            ->newQuery()
+            ->where('user_id', $userId)
+            ->where('status', 'active')
+            ->where('ends_at', '>', now())
+            ->exists();
+    }
 }

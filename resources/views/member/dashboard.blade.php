@@ -262,9 +262,13 @@
                         </h3>
 
                         <p class="mt-1 text-sm text-mora-muted">
+                            @if ($subscription->starts_at && $subscription->ends_at)
                             {{ $subscription->starts_at->format('d/m/Y') }}
                             -
                             {{ $subscription->ends_at->format('d/m/Y') }}
+                            @else
+                            في انتظار تأكيد الدفع
+                            @endif
                         </p>
 
                     </div>
