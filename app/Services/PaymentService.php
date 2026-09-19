@@ -13,7 +13,8 @@ use Illuminate\Validation\ValidationException;
 class PaymentService
 {
     public function __construct(
-        protected PaymentRepositoryInterface $repository
+        protected PaymentRepositoryInterface $repository,
+        protected NotificationService $notificationService,
     ) {}
 
     public function getUserPayments(
@@ -32,15 +33,16 @@ class PaymentService
         string $transactionReference,
         string $paidAt
     ): Payment {
-        return DB::transaction(function () use (
+        $payment = DB::transaction(function () use (
             $paymentId,
             $userId,
             $transactionReference,
             $paidAt
         ) {
-
-            $payment = $this->repository
-                ->findByIdForUser($paymentId, $userId);
+            $payment = $this->repository->findByIdForUser(
+                $paymentId,
+                $userId
+            );
 
             if (! $payment) {
                 throw ValidationException::withMessages([
@@ -48,9 +50,7 @@ class PaymentService
                 ]);
             }
 
-            if (
-                $payment->status !== PaymentStatus::PENDING
-            ) {
+            if ($payment->status !== PaymentStatus::PENDING) {
                 throw ValidationException::withMessages([
                     'payment' => 'لا يمكن تعديل عملية الدفع الحالية.',
                 ]);
@@ -69,13 +69,21 @@ class PaymentService
                 $payment,
                 [
                     'transaction_reference' => $transactionReference,
-
                     'paid_at' => $paidAt,
-
                     'status' => PaymentStatus::PENDING,
                 ]
             );
         });
+
+        $this->notificationService->create(
+            userId: $userId,
+            title: 'تم إرسال بيانات الدفع',
+            message: 'تم إرسال رقم عملية فودافون كاش بنجاح، وسيتم مراجعة عملية الدفع من الإدارة.',
+            type: 'payment',
+            actionUrl: route('member.payment.show', $payment->id),
+        );
+
+        return $payment;
     }
 
     public function getPaymentForUser(
@@ -103,8 +111,7 @@ class PaymentService
     public function approvePayment(
         int $paymentId
     ): Payment {
-        return DB::transaction(function () use ($paymentId) {
-
+        $payment = DB::transaction(function () use ($paymentId) {
             $payment = $this->repository->findById($paymentId);
 
             if (! $payment) {
@@ -161,17 +168,26 @@ class PaymentService
                 'subscription.membershipPlan',
             ]);
         });
+
+        $this->notificationService->create(
+            userId: $payment->user_id,
+            title: 'تم تأكيد الدفع',
+            message: "تم تأكيد عملية الدفع وتفعيل عضويتك في باقة {$payment->subscription->membershipPlan->name}.",
+            type: 'payment',
+            actionUrl: route('member.subscription'),
+        );
+
+        return $payment;
     }
 
     public function rejectPayment(
         int $paymentId,
         ?string $notes = null
     ): Payment {
-        return DB::transaction(function () use (
+        $payment = DB::transaction(function () use (
             $paymentId,
             $notes
         ) {
-
             $payment = $this->repository->findById($paymentId);
 
             if (! $payment) {
@@ -203,6 +219,22 @@ class PaymentService
                 'subscription.membershipPlan',
             ]);
         });
+
+        $message = 'تم رفض عملية الدفع.';
+
+        if ($payment->notes) {
+            $message .= " السبب: {$payment->notes}";
+        }
+
+        $this->notificationService->create(
+            userId: $payment->user_id,
+            title: 'تم رفض عملية الدفع',
+            message: $message,
+            type: 'payment',
+            actionUrl: route('member.subscription'),
+        );
+
+        return $payment;
     }
 
     public function countPendingPayments(): int

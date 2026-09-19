@@ -8,6 +8,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Member\AttendanceController;
 use App\Http\Controllers\Member\DashboardController as MemberDashboardController;
 use App\Http\Controllers\Member\MembershipController;
+use App\Http\Controllers\Member\NotificationController;
 use App\Http\Controllers\Member\PaymentController;
 use App\Http\Controllers\Member\ProfileController;
 use App\Http\Controllers\Member\SubscriptionController;
@@ -208,4 +209,19 @@ Route::middleware(['auth', 'verified', 'role:member'])
             ProfileController::class,
             'update',
         ])->name('profile.update');
+
+        Route::get('/notifications', [
+            NotificationController::class,
+            'index',
+        ])->name('notifications');
+
+        Route::post('/notifications/{notification}/read', [
+            NotificationController::class,
+            'markAsRead',
+        ])->name('notifications.read');
+
+        Route::post('/notifications/read-all', [
+            NotificationController::class,
+            'markAllAsRead',
+        ])->name('notifications.read-all');
     });

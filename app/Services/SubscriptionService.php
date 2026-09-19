@@ -5,8 +5,8 @@ namespace App\Services;
 use App\Enums\PaymentStatus;
 use App\Enums\SubscriptionStatus;
 use App\Models\MembershipPlan;
-use App\Models\Payment;
 use App\Models\Subscription;
+use App\Repositories\Contracts\PaymentRepositoryInterface;
 use App\Repositories\Contracts\SubscriptionRepositoryInterface;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\DB;
@@ -15,7 +15,9 @@ use Illuminate\Validation\ValidationException;
 class SubscriptionService
 {
     public function __construct(
-        protected SubscriptionRepositoryInterface $repository
+        protected SubscriptionRepositoryInterface $repository,
+        protected PaymentRepositoryInterface $paymentRepository,
+        protected NotificationService $notificationService,
     ) {}
 
     public function getActiveSubscription(
@@ -38,7 +40,6 @@ class SubscriptionService
         int $userId,
         MembershipPlan $plan
     ): Subscription {
-
         if ($this->repository->findActiveByUser($userId)) {
             throw ValidationException::withMessages([
                 'subscription' => 'لديك عضوية فعالة بالفعل.',
@@ -51,8 +52,10 @@ class SubscriptionService
             ]);
         }
 
-        return DB::transaction(function () use ($userId, $plan) {
-
+        $subscription = DB::transaction(function () use (
+            $userId,
+            $plan
+        ) {
             $subscription = $this->repository->create([
                 'user_id' => $userId,
                 'membership_plan_id' => $plan->id,
@@ -62,7 +65,7 @@ class SubscriptionService
                 'status' => SubscriptionStatus::PENDING,
             ]);
 
-            Payment::create([
+            $this->paymentRepository->create([
                 'user_id' => $userId,
                 'subscription_id' => $subscription->id,
                 'amount' => $plan->price,
@@ -75,6 +78,21 @@ class SubscriptionService
                 'payment',
             ]);
         });
+
+        $this->notificationService->create(
+            userId: $userId,
+            title: 'تم إنشاء طلب الاشتراك',
+            message: "تم إنشاء طلب اشتراكك في باقة {$plan->name}. برجاء إتمام الدفع عبر فودافون كاش.",
+            type: 'subscription',
+            actionUrl: $subscription->payment
+                ? route(
+                    'member.payment.show',
+                    $subscription->payment->id
+                )
+                : route('member.subscription'),
+        );
+
+        return $subscription;
     }
 
     public function getPendingSubscription(
