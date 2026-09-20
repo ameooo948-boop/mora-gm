@@ -1,9 +1,11 @@
 <?php
 
+use App\Http\Controllers\Admin\AttendanceController as AdminAttendanceController;
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
+use App\Http\Controllers\Admin\GalleryItemController;
 use App\Http\Controllers\Admin\GymProfileController;
 use App\Http\Controllers\Admin\MemberController;
-use App\Http\Controllers\Admin\MembershipPlanController;
+use App\Http\Controllers\Admin\MembershipPlanController as AdminMembershipPlanController;
 use App\Http\Controllers\Admin\PaymentController as AdminPaymentController;
 use App\Http\Controllers\Admin\SubscriptionController as AdminSubscriptionController;
 use App\Http\Controllers\Admin\TrainerController;
@@ -99,7 +101,7 @@ Route::middleware(['auth', 'role:admin'])
         ])->name('payments.reject');
 
         Route::get('/attendance', [
-            AttendanceController::class,
+            AdminAttendanceController::class,
             'index',
         ])->name('attendance.index');
 
@@ -158,13 +160,31 @@ Route::middleware(['auth', 'role:admin'])
         Route::put('/trainers/{trainer}', [TrainerController::class, 'update'])
             ->name('trainers.update');
 
-        Route::resource('membership-plans', MembershipPlanController::class)
+        Route::resource('membership-plans', AdminMembershipPlanController::class)
             ->only(['index', 'create', 'store', 'edit', 'update'])
             ->names('membership-plans');
 
         Route::resource('gym-profile', GymProfileController::class)
             ->only(['index', 'create', 'store', 'edit', 'update'])
             ->names('gym-profile');
+
+        Route::get('/gallery', [GalleryItemController::class, 'index'])
+            ->name('gallery.index');
+
+        Route::get('/gallery/create', [GalleryItemController::class, 'create'])
+            ->name('gallery.create');
+
+        Route::post('/gallery', [GalleryItemController::class, 'store'])
+            ->name('gallery.store');
+
+        Route::get('/gallery/{id}/edit', [GalleryItemController::class, 'edit'])
+            ->name('gallery.edit');
+
+        Route::put('/gallery/{id}', [GalleryItemController::class, 'update'])
+            ->name('gallery.update');
+
+        Route::delete('/gallery/{id}', [GalleryItemController::class, 'destroy'])
+            ->name('gallery.destroy');
     });
 
 Route::middleware('auth')->group(function () {
