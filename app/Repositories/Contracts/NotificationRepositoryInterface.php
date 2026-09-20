@@ -26,4 +26,10 @@ interface NotificationRepositoryInterface
     public function markAsRead(Notification $notification): Notification;
 
     public function markAllAsRead(int $userId): int;
+
+    public function existsRecentForUser(
+        int $userId,
+        string $title,
+        int $days = 1
+    ): bool;
 }

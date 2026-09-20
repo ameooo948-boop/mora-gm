@@ -4,6 +4,7 @@ namespace App\Repositories\Contracts;
 
 use App\Models\Subscription;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
+use Illuminate\Database\Eloquent\Collection;
 
 interface SubscriptionRepositoryInterface
 {
@@ -34,4 +35,8 @@ interface SubscriptionRepositoryInterface
     ): LengthAwarePaginator;
 
     public function findById(int $id): ?Subscription;
+
+    public function getExpiringSubscriptions(): Collection;
+
+    public function getExpiredSubscriptions(): Collection;
 }

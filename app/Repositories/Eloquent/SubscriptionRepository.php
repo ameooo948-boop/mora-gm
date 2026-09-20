@@ -5,6 +5,7 @@ namespace App\Repositories\Eloquent;
 use App\Models\Subscription;
 use App\Repositories\Contracts\SubscriptionRepositoryInterface;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
+use Illuminate\Database\Eloquent\Collection;
 
 class SubscriptionRepository implements SubscriptionRepositoryInterface
 {
@@ -128,5 +129,32 @@ class SubscriptionRepository implements SubscriptionRepositoryInterface
                 'payment',
             ])
             ->find($id);
+    }
+
+    public function getExpiringSubscriptions(): Collection
+    {
+        return $this->model
+            ->newQuery()
+            ->with('membershipPlan')
+            ->where('status', 'active')
+            ->whereNotNull('ends_at')
+            ->where('ends_at', '>', now())
+            ->where(
+                'ends_at',
+                '<=',
+                now()->addDays(3)
+            )
+            ->get();
+    }
+
+    public function getExpiredSubscriptions(): Collection
+    {
+        return $this->model
+            ->newQuery()
+            ->with('membershipPlan')
+            ->where('status', 'active')
+            ->whereNotNull('ends_at')
+            ->where('ends_at', '<=', now())
+            ->get();
     }
 }

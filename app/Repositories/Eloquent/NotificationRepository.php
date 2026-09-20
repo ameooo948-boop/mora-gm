@@ -75,4 +75,16 @@ class NotificationRepository implements NotificationRepositoryInterface
                 'read_at' => now(),
             ]);
     }
+
+    public function existsRecentForUser(
+        int $userId,
+        string $title,
+        int $days = 1
+    ): bool {
+        return Notification::query()
+            ->where('user_id', $userId)
+            ->where('title', $title)
+            ->where('created_at', '>=', now()->subDays($days))
+            ->exists();
+    }
 }

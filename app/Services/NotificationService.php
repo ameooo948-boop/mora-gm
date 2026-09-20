@@ -76,4 +76,16 @@ class NotificationService
     {
         return $this->repository->markAllAsRead($userId);
     }
+
+    public function existsRecentForUser(
+        int $userId,
+        string $title,
+        int $days = 1
+    ): bool {
+        return $this->repository->existsRecentForUser(
+            $userId,
+            $title,
+            $days
+        );
+    }
 }
