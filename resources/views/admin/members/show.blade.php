@@ -176,7 +176,7 @@
                             </p>
 
                             <p class="mt-1 text-sm text-mora-text">
-                                {{ $subscription->membershipPlan->duration_days }}
+                                {{ $subscription->duration_days ?? $subscription->membershipPlan->duration_days }}
                                 يوم
                             </p>
                         </div>

@@ -35,7 +35,7 @@
                         الاسم الكامل
                     </label>
 
-                    <input id="name" type="text" name="name" value="{{ old('name') }}" required autofocus autocomplete="name" class="w-full rounded-[6px] border border-mora-border bg-mora-surface px-4 py-3.5 text-sm outline-none transition focus:border-mora-accent" placeholder="Your full name">
+                    <input id="name" type="text" name="name" value="{{ old('name') }}" required autofocus autocomplete="name" class="w-full rounded-[6px] border border-mora-border bg-mora-surface px-4 py-3.5 text-sm outline-none transition focus:border-mora-accent" placeholder="اكتب اسمك الكامل">
 
                     @error('name')
                     <p class="mt-2 text-xs text-red-400">
@@ -52,7 +52,7 @@
                             البريد الإلكتروني
                         </label>
 
-                        <input id="email" type="email" name="email" value="{{ old('email') }}" required autocomplete="email" class="w-full rounded-[6px] border border-mora-border bg-mora-surface px-4 py-3.5 text-sm outline-none transition focus:border-mora-accent" placeholder="you@example.com">
+                        <input id="email" type="email" name="email" value="{{ old('email') }}" required autocomplete="email" class="w-full rounded-[6px] border border-mora-border bg-mora-surface px-4 py-3.5 text-sm outline-none transition focus:border-mora-accent" placeholder="example@email.com">
 
                         @error('email')
                         <p class="mt-2 text-xs text-red-400">
@@ -108,7 +108,7 @@
                         كلمة المرور
                     </label>
 
-                    <input id="password" type="password" name="password" required autocomplete="new-password" class="w-full rounded-[6px] border border-mora-border bg-mora-surface px-4 py-3.5 text-sm outline-none transition focus:border-mora-accent" placeholder="At least 8 characters">
+                    <input id="password" type="password" name="password" required autocomplete="new-password" class="w-full rounded-[6px] border border-mora-border bg-mora-surface px-4 py-3.5 text-sm outline-none transition focus:border-mora-accent" placeholder="8 أحرف على الأقل">
 
                     @error('password')
                     <p class="mt-2 text-xs text-red-400">
@@ -120,10 +120,10 @@
 
                 <div>
                     <label for="password_confirmation" class="mb-2 block text-xs font-bold uppercase tracking-[0.15em]">
-                        Confirm كلمة المرور
+                        تأكيد كلمة المرور
                     </label>
 
-                    <input id="password_confirmation" type="password" name="password_confirmation" required autocomplete="new-password" class="w-full rounded-[6px] border border-mora-border bg-mora-surface px-4 py-3.5 text-sm outline-none transition focus:border-mora-accent" placeholder="Repeat your password">
+                    <input id="password_confirmation" type="password" name="password_confirmation" required autocomplete="new-password" class="w-full rounded-[6px] border border-mora-border bg-mora-surface px-4 py-3.5 text-sm outline-none transition focus:border-mora-accent" placeholder="أعد كتابة كلمة المرور">
                 </div>
 
 

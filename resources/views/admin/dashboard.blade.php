@@ -7,7 +7,7 @@
 
         <div class="mb-12">
             <p class="mb-3 text-xs font-semibold uppercase tracking-[0.25em] text-mora-accent">
-                MORA ADMIN
+                إدارة MORA
             </p>
 
             <h1 class="font-display text-4xl font-bold text-mora-text md:text-5xl">
@@ -129,13 +129,53 @@
                     </p>
                 </a>
 
-                <a href="{{ route('home') }}#memberships" class="border border-mora-border bg-mora-card p-6 transition hover:border-mora-accent">
+                <a href="{{ route('admin.training-sessions.index') }}" class="border border-mora-border bg-mora-card p-6 transition hover:border-mora-accent">
                     <h3 class="font-display text-xl font-semibold text-mora-text">
-                        الباقات
+                        مواعيد التدريب
                     </h3>
 
                     <p class="mt-2 text-sm leading-6 text-mora-muted">
-                        مراجعة الباقات وأسعار الاشتراك الحالية.
+                        إدارة مواعيد الجلسات وربط كل جلسة بالمدرب المناسب.
+                    </p>
+                </a>
+
+                <a href="{{ route('admin.trainers.index') }}" class="border border-mora-border bg-mora-card p-6 transition hover:border-mora-accent">
+                    <h3 class="font-display text-xl font-semibold text-mora-text">
+                        المدربون
+                    </h3>
+
+                    <p class="mt-2 text-sm leading-6 text-mora-muted">
+                        إدارة بيانات المدربين وحالتهم ومواعيد التدريب الخاصة بهم.
+                    </p>
+                </a>
+
+                <a href="{{ route('admin.membership-plans.index') }}" class="border border-mora-border bg-mora-card p-6 transition hover:border-mora-accent">
+                    <h3 class="font-display text-xl font-semibold text-mora-text">
+                        باقات العضوية
+                    </h3>
+
+                    <p class="mt-2 text-sm leading-6 text-mora-muted">
+                        إدارة الأسعار والمدد والمميزات وحالة الباقات.
+                    </p>
+                </a>
+
+                <a href="{{ route('admin.gallery.index') }}" class="border border-mora-border bg-mora-card p-6 transition hover:border-mora-accent">
+                    <h3 class="font-display text-xl font-semibold text-mora-text">
+                        معرض الصور
+                    </h3>
+
+                    <p class="mt-2 text-sm leading-6 text-mora-muted">
+                        إدارة الصور والتصنيفات وترتيب ظهورها على الموقع.
+                    </p>
+                </a>
+
+                <a href="{{ route('admin.gym-profile.index') }}" class="border border-mora-border bg-mora-card p-6 transition hover:border-mora-accent">
+                    <h3 class="font-display text-xl font-semibold text-mora-text">
+                        إعدادات الجيم
+                    </h3>
+
+                    <p class="mt-2 text-sm leading-6 text-mora-muted">
+                        تحديث بيانات الجيم ووسائل التواصل ومعلومات الدفع.
                     </p>
                 </a>
 

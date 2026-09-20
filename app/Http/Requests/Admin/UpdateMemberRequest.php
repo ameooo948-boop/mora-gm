@@ -3,14 +3,20 @@
 namespace App\Http\Requests\Admin;
 
 use App\Enums\Gender;
-use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
-class UpdateMemberRequest extends FormRequest
+class UpdateMemberRequest extends AdminFormRequest
 {
-    public function authorize(): bool
+
+    protected function prepareForValidation(): void
     {
-        return auth()->check() && auth()->user()->isAdmin();
+        $this->merge([
+            'name' => trim((string) $this->input('name')),
+            'email' => strtolower(trim((string) $this->input('email'))),
+            'phone' => $this->filled('phone')
+                ? trim((string) $this->input('phone'))
+                : null,
+        ]);
     }
 
     public function rules(): array

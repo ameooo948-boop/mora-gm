@@ -20,6 +20,8 @@ interface TrainerRepositoryInterface
 
     public function findById(int $id): ?Trainer;
 
+    public function findByIdForUpdate(int $id): ?Trainer;
+
     public function create(array $data): Trainer;
 
     public function update(

@@ -49,6 +49,15 @@ class MembershipPlanRepository implements MembershipPlanRepositoryInterface
             ->find($id);
     }
 
+    public function findByIdForUpdate(int $id): ?MembershipPlan
+    {
+        return $this->model
+            ->newQuery()
+            ->whereKey($id)
+            ->lockForUpdate()
+            ->first();
+    }
+
     public function create(array $data): MembershipPlan
     {
         return $this->model

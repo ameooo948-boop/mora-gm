@@ -23,6 +23,9 @@ use App\Repositories\Eloquent\TrainerRepository;
 use App\Repositories\Eloquent\TrainingSessionRepository;
 use App\Repositories\Eloquent\UserRepository;
 use App\View\Composers\NotificationComposer;
+use Illuminate\Auth\Notifications\ResetPassword;
+use Illuminate\Auth\Notifications\VerifyEmail;
+use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 
@@ -83,6 +86,29 @@ class AppServiceProvider extends ServiceProvider
 
     public function boot(): void
     {
+        VerifyEmail::toMailUsing(function ($notifiable, string $url): MailMessage {
+            return (new MailMessage)
+                ->subject('تأكيد بريدك الإلكتروني - MORA GYM')
+                ->greeting('مرحبًا بك في MORA GYM')
+                ->line('يرجى تأكيد بريدك الإلكتروني لتفعيل حسابك.')
+                ->action('تأكيد البريد الإلكتروني', $url)
+                ->line('إذا لم تنشئ حسابًا في MORA GYM، يمكنك تجاهل هذه الرسالة.');
+        });
+
+        ResetPassword::toMailUsing(function ($notifiable, string $token): MailMessage {
+            $url = url(route('password.reset', [
+                'token' => $token,
+                'email' => $notifiable->getEmailForPasswordReset(),
+            ], false));
+
+            return (new MailMessage)
+                ->subject('إعادة تعيين كلمة المرور - MORA GYM')
+                ->greeting('مرحبًا بك في MORA GYM')
+                ->line('تلقينا طلبًا لإعادة تعيين كلمة المرور الخاصة بحسابك.')
+                ->action('إعادة تعيين كلمة المرور', $url)
+                ->line('هذا الرابط صالح لمدة محدودة. إذا لم تطلب إعادة التعيين، يمكنك تجاهل هذه الرسالة.');
+        });
+
         View::composer(
             'components.navbar',
             NotificationComposer::class

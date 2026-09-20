@@ -14,6 +14,7 @@ class Subscription extends Model
         'user_id',
         'membership_plan_id',
         'price',
+        'duration_days',
         'starts_at',
         'ends_at',
         'status',
@@ -24,6 +25,7 @@ class Subscription extends Model
     {
         return [
             'price' => 'decimal:2',
+            'duration_days' => 'integer',
             'starts_at' => 'datetime',
             'ends_at' => 'datetime',
             'status' => SubscriptionStatus::class,

@@ -65,6 +65,15 @@ class TrainerRepository implements TrainerRepositoryInterface
             ->find($id);
     }
 
+    public function findByIdForUpdate(int $id): ?Trainer
+    {
+        return $this->model
+            ->newQuery()
+            ->whereKey($id)
+            ->lockForUpdate()
+            ->first();
+    }
+
     public function create(array $data): Trainer
     {
         return $this->model

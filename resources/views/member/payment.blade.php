@@ -68,7 +68,7 @@
             <div class="mt-6 space-y-4 text-sm leading-7 text-mora-muted">
 
                 <p>
-                    1. قم بتحويل قيمة العضوية إلى رقم Vodafone Cash الخاص بـ MORA.
+                    1. قم بتحويل قيمة العضوية إلى رقم فودافون كاش الخاص بـ MORA.
                 </p>
 
                 <p>
@@ -89,7 +89,7 @@
             <div class="mt-6 rounded-lg border border-mora-border bg-mora-bg p-5">
 
                 <p class="text-sm text-mora-muted">
-                    رقم Vodafone Cash
+                    رقم فودافون كاش
                 </p>
 
                 @if ($gymProfile?->vodafone_cash)

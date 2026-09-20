@@ -87,8 +87,8 @@
                             {{ number_format((float) $plan->price, 0) }}
                         </span>
 
-                        <span class="mb-2 text-xs uppercase tracking-[0.15em] text-mora-muted">
-                            EGP
+                        <span class="mb-2 text-xs text-mora-muted">
+                            جنيه
                         </span>
 
                     </div>

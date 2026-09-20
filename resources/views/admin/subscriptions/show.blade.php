@@ -178,7 +178,7 @@
                     </p>
 
                     <p class="mt-2 text-sm text-mora-text">
-                        Vodafone Cash
+                        فودافون كاش
                     </p>
                 </div>
 

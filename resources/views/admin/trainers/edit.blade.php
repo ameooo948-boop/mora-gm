@@ -92,7 +92,7 @@
 
                     <div class="md:col-span-2">
                         <label class="mb-2 block text-sm font-medium text-mora-text">
-                            مسار الصورة
+                            مسار الصورة داخل مجلد الصور
                         </label>
 
                         <input type="text" name="image" value="{{ old('image', $trainer->image) }}" dir="ltr" class="w-full rounded-md border border-mora-border bg-mora-card px-4 py-3 text-left text-sm text-mora-text outline-none placeholder:text-mora-muted focus:border-mora-accent">

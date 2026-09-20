@@ -25,6 +25,20 @@ class AttendanceRepository implements AttendanceRepositoryInterface
             ->first();
     }
 
+    public function findForUserAndDateForUpdate(
+        int $userId,
+        int $trainingSessionId,
+        string $date
+    ): ?Attendance {
+        return $this->model
+            ->newQuery()
+            ->where('user_id', $userId)
+            ->where('training_session_id', $trainingSessionId)
+            ->whereDate('attendance_date', $date)
+            ->lockForUpdate()
+            ->first();
+    }
+
     public function create(array $data): Attendance
     {
         return $this->model

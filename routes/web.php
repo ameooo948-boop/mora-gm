@@ -35,12 +35,14 @@ Route::middleware('guest')->group(function () {
         ->name('login');
 
     Route::post('/login', [AuthController::class, 'login'])
+        ->middleware('throttle:5,1')
         ->name('login.store');
 
     Route::get('/register', [AuthController::class, 'showRegistrationForm'])
         ->name('register');
 
     Route::post('/register', [AuthController::class, 'register'])
+        ->middleware('throttle:10,1')
         ->name('register.store');
 
     Route::get('/forgot-password', [
@@ -51,7 +53,7 @@ Route::middleware('guest')->group(function () {
     Route::post('/forgot-password', [
         PasswordController::class,
         'sendResetLink',
-    ])->name('password.email');
+    ])->middleware('throttle:6,1')->name('password.email');
 
     Route::get('/reset-password/{token}', [
         PasswordController::class,
@@ -61,21 +63,12 @@ Route::middleware('guest')->group(function () {
     Route::post('/reset-password', [
         PasswordController::class,
         'reset',
-    ])->name('password.update');
+    ])->middleware('throttle:6,1')->name('password.update');
 });
 
 Route::post('/logout', [AuthController::class, 'logout'])
     ->middleware('auth')
     ->name('logout');
-
-Route::middleware(['auth', 'verified', 'role:member'])
-    ->prefix('member')
-    ->name('member.')
-    ->group(function () {
-
-        Route::get('/dashboard', [MemberDashboardController::class, 'index'])
-            ->name('dashboard');
-    });
 
 Route::middleware(['auth', 'role:admin'])
     ->prefix('admin')
@@ -199,8 +192,12 @@ Route::middleware('auth')->group(function () {
         $request->fulfill();
 
         return redirect()
-            ->route('member.dashboard')
-            ->with('success', 'Your email has been verified successfully.');
+            ->route(
+                $request->user()->isAdmin()
+                    ? 'admin.dashboard'
+                    : 'member.dashboard'
+            )
+            ->with('success', 'تم تأكيد بريدك الإلكتروني بنجاح.');
     })
         ->middleware('signed')
         ->name('verification.verify');
@@ -209,14 +206,18 @@ Route::middleware('auth')->group(function () {
         Request $request
     ): RedirectResponse {
         if ($request->user()->hasVerifiedEmail()) {
-            return redirect()->route('member.dashboard');
+            return redirect()->route(
+                $request->user()->isAdmin()
+                    ? 'admin.dashboard'
+                    : 'member.dashboard'
+            );
         }
 
         $request->user()->sendEmailVerificationNotification();
 
         return back()->with(
             'success',
-            'A new verification link has been sent to your email.'
+            'تم إرسال رابط جديد لتأكيد بريدك الإلكتروني.'
         );
     })
         ->middleware('throttle:6,1')

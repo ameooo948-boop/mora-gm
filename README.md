@@ -1,59 +1,191 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# MORA GYM
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+نظام إدارة موقع وصالة **MORA GYM** مبني باستخدام Laravel 12، ومصمم ليجمع بين الموقع التعريفي للجيم ولوحة إدارة الأعضاء والاشتراكات والمدفوعات والحضور والإشعارات.
 
-## About Laravel
+## المزايا
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+- موقع عام باللغة العربية وبواجهة RTL.
+- تسجيل وإنشاء حساب وتأكيد البريد وإعادة تعيين كلمة المرور.
+- إدارة الأعضاء والملفات الشخصية.
+- باقات عضوية شهرية و3 أشهر و6 أشهر.
+- اشتراكات مرتبطة بدفعات فودافون كاش مع مراجعة من الإدارة.
+- تسجيل الحضور والانصراف مع دعم الجلسات التي تمتد بعد منتصف الليل.
+- إشعارات للأعضاء مرتبطة بالاشتراكات والمدفوعات وانتهاء العضوية.
+- إدارة المدربين ومواعيد التدريب وربط المدرب المناسب بنوع الجلسة.
+- إدارة معرض الصور.
+- إدارة بيانات الجيم ومعلومات التواصل من لوحة الإدارة.
+- لوحة تحكم عربية للإدارة مع Sidebar متجاوب.
+- صفحات أخطاء عربية للحالات الشائعة.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## التقنية
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+- PHP 8.2+
+- Laravel 12
+- Blade
+- Tailwind CSS 4
+- Alpine.js
+- Vite
+- MySQL أو SQLite
+- Pest / PHPUnit للاختبارات
 
-## Learning Laravel
+## الهيكل البرمجي
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
+المشروع يلتزم بفصل مسؤوليات واضح:
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+```text
+Request
+ ↓
+Form Request
+ ↓
+Controller
+ ↓
+Service
+ ↓
+Repository Interface
+ ↓
+Repository Implementation
+ ↓
+Eloquent Model
+ ↓
+Database
+```
 
-## Laravel Sponsors
+منطق الأعمال والمعاملات موجود في Services، والوصول إلى بيانات Eloquent موجود في Repositories، بينما الـ Controllers مسؤولة عن استقبال الطلب وإرجاع الاستجابة.
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+## التشغيل المحلي
 
-### Premium Partners
+بعد تنزيل المشروع:
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+```bash
+composer install
+cp .env.example .env
+php artisan key:generate
+php artisan migrate --seed
+npm install
+npm run build
+php artisan optimize:clear
+```
 
-## Contributing
+على Windows PowerShell يمكن نسخ ملف البيئة باستخدام:
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+```powershell
+Copy-Item .env.example .env
+```
 
-## Code of Conduct
+لتشغيل الخادم محليًا:
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+```bash
+php artisan serve
+```
 
-## Security Vulnerabilities
+وللتطوير مع Vite:
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+```bash
+npm run dev
+```
 
-## License
+## قاعدة البيانات
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+للبيئة المحلية يمكن استخدام SQLite الموجود داخل المشروع، أو ضبط MySQL من خلال `.env`.
+
+بعد تعديل قاعدة البيانات:
+
+```bash
+php artisan migrate
+```
+
+ولإعادة إنشاء قاعدة بيانات الاختبار/التطوير مع البيانات التجريبية:
+
+```bash
+php artisan migrate:fresh --seed
+```
+
+الـ Seeders الحالية مصممة بحيث لا تحذف بيانات الإدارة الموجودة عند إعادة تشغيل seeding. بيانات الإعدادات والباقات تتم إضافتها أو تصحيح القيم القديمة المعروفة فقط.
+
+## الصور
+
+المسارات التي تدخل من لوحة الإدارة للصور تشير إلى الملفات الموجودة داخل:
+
+```text
+public/images
+```
+
+مثال:
+
+```text
+gallery/gym.webp
+```
+
+أي أن الملف الفعلي يكون:
+
+```text
+public/images/gallery/gym.webp
+```
+
+## الدفع
+
+الدفع الحالي يدعم **فودافون كاش** بشكل يدوي:
+
+1. العضو يختار الباقة.
+2. يتم إنشاء اشتراك بحالة قيد الانتظار.
+3. يتم إنشاء عملية دفع مرتبطة بالاشتراك.
+4. العضو يرسل رقم العملية وتاريخ التحويل.
+5. الإدارة تراجع العملية.
+6. عند القبول يتم تفعيل العضوية وتحديد تاريخ النهاية حسب مدة الباقة المحفوظة مع الاشتراك.
+
+## الجدولة
+
+للمهام المجدولة الخاصة بانتهاء العضويات:
+
+```bash
+php artisan schedule:work
+```
+
+## الاختبارات
+
+تشغيل جميع الاختبارات:
+
+```bash
+php artisan test
+```
+
+الاختبارات الحالية تغطي على الأقل:
+
+- صلاحيات الإدارة والعضو.
+- تسجيل الحسابات كأعضاء.
+- إدارة معرض الصور.
+- إنشاء الاشتراك والدفع.
+- تفعيل الدفع والعضوية.
+- حماية بيانات دفع الأعضاء.
+- الحضور في الجلسات الممتدة بعد منتصف الليل.
+- منع الحضور في الجلسات غير المفعلة.
+
+## إعداد الإنتاج
+
+عند النشر على استضافة فعلية اضبط في `.env` ما يناسب بيئتك، ومن أهم القيم:
+
+```env
+APP_ENV=production
+APP_DEBUG=false
+APP_URL=https://your-domain.example
+APP_TIMEZONE=Africa/Cairo
+APP_LOCALE=ar
+APP_FALLBACK_LOCALE=ar
+SESSION_SECURE_COOKIE=true
+```
+
+استخدم HTTPS دائمًا في الإنتاج، ولا ترفع ملف `.env` الحقيقي إلى المستودع أو إلى النسخ المشتركة.
+
+## حساب الإدارة
+
+يجب إنشاء حساب الإدارة بشكل آمن على قاعدة البيانات أو من خلال آلية داخلية موثوقة، مع ضبط `role` إلى `admin`. التسجيل العام لا يسمح بإنشاء حسابات إدارية؛ كل الحسابات التي يتم تسجيلها من الواجهة العامة تُنشأ كأعضاء.
+
+## ملاحظات
+
+الصور الحالية التي لا يوجد لها ملف فعلي داخل `public/images` ستظهر ببديل بصري بدل كسر التصميم.
+
+لوحة الإدارة تستخدم نفس نظام الصلاحيات الموجود في Middleware، ولا تعتمد على إخفاء الروابط فقط.
+
+## الترخيص
+
+المشروع مبني على Laravel ويستخدم ترخيص MIT لمكونات Laravel كما هو موضح في حزم المشروع.

@@ -7,7 +7,7 @@
 
         <div class="mb-10">
             <p class="mb-3 text-xs font-semibold uppercase tracking-[0.25em] text-mora-accent">
-                MORA ADMIN
+                إدارة MORA
             </p>
 
             <h1 class="font-display text-4xl font-bold text-mora-text md:text-5xl">

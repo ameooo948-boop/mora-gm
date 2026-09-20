@@ -25,8 +25,8 @@
             </h1>
 
             <p class="mt-4 text-sm leading-7 text-mora-muted">
-                We sent a verification link to your email address.
-                Please check your inbox and click the link to activate your account.
+                أرسلنا رابط تأكيد إلى بريدك الإلكتروني.
+                راجع صندوق الوارد واضغط على الرابط لتفعيل حسابك.
             </p>
 
             @if (session('success'))

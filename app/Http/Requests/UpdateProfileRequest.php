@@ -2,15 +2,23 @@
 
 namespace App\Http\Requests;
 
-use App\Enums\Gender;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rule;
 
 class UpdateProfileRequest extends FormRequest
 {
     public function authorize(): bool
     {
         return $this->user() !== null;
+    }
+
+    protected function prepareForValidation(): void
+    {
+        $this->merge([
+            'name' => trim((string) $this->input('name')),
+            'phone' => $this->filled('phone')
+                ? trim((string) $this->input('phone'))
+                : null,
+        ]);
     }
 
     public function rules(): array
@@ -26,13 +34,9 @@ class UpdateProfileRequest extends FormRequest
             'phone' => [
                 'nullable',
                 'string',
-                'max:20',
+                'max:30',
             ],
 
-            'gender' => [
-                'required',
-                Rule::enum(Gender::class),
-            ],
         ];
     }
 
@@ -47,8 +51,6 @@ class UpdateProfileRequest extends FormRequest
             'phone.string' => 'رقم الهاتف غير صحيح.',
             'phone.max' => 'رقم الهاتف طويل جدًا.',
 
-            'gender.required' => 'من فضلك اختر النوع.',
-            'gender.enum' => 'النوع المحدد غير صحيح.',
         ];
     }
 }

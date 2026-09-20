@@ -89,7 +89,7 @@
                         البريد الإلكتروني
                     </label>
 
-                    <input id="email" type="email" name="email" value="{{ old('email') }}" required autofocus autocomplete="email" class="w-full rounded-[6px] border border-mora-border bg-mora-card px-4 py-3.5 text-sm outline-none transition placeholder:text-mora-muted/50 focus:border-mora-accent" placeholder="you@example.com">
+                    <input id="email" type="email" name="email" value="{{ old('email') }}" required autofocus autocomplete="email" class="w-full rounded-[6px] border border-mora-border bg-mora-card px-4 py-3.5 text-sm outline-none transition placeholder:text-mora-muted/50 focus:border-mora-accent" placeholder="example@email.com">
 
                     @error('email')
                     <p class="mt-2 text-xs text-red-400">

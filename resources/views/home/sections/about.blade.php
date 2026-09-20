@@ -49,14 +49,14 @@
                     <span class="h-px w-10 bg-mora-accent"></span>
 
                     <span class="text-[10px] font-semibold uppercase tracking-[0.3em] text-mora-accent">
-                        {{ $gymProfile?->eyebrow ?? 'ABOUT MORA' }}
+                        {{ $gymProfile?->eyebrow ?? 'عن MORA' }}
                     </span>
 
                 </div>
 
 
                 <h2 class="max-w-2xl font-display text-5xl font-semibold uppercase leading-[0.88] tracking-tight sm:text-6xl lg:text-8xl">
-                    {{ $gymProfile?->about_title ?? 'More Than A Gym.' }}
+                    {{ $gymProfile?->about_title ?? 'أكثر من مجرد جيم.' }}
                 </h2>
 
 

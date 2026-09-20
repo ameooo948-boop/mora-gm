@@ -33,6 +33,11 @@ class MembershipPlanService
         return $this->repository->findById($id);
     }
 
+    public function getPlanForUpdate(int $id): ?MembershipPlan
+    {
+        return $this->repository->findByIdForUpdate($id);
+    }
+
     public function createPlan(array $data): MembershipPlan
     {
         return $this->repository->create($data);

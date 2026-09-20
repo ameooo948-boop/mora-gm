@@ -36,4 +36,21 @@ class UserService
             $data
         );
     }
+
+    public function updateMember(
+        User $user,
+        array $data
+    ): User {
+        if (
+            array_key_exists('email', $data)
+            && strcasecmp($user->email, $data['email']) !== 0
+        ) {
+            $data['email_verified_at'] = null;
+        }
+
+        return $this->repository->updateMember(
+            $user,
+            $data
+        );
+    }
 }

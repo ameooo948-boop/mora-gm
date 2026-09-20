@@ -7,6 +7,7 @@ use App\Models\TrainingSession;
 use App\Repositories\Contracts\TrainerRepositoryInterface;
 use App\Repositories\Contracts\TrainingSessionRepositoryInterface;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Collection;
 use Illuminate\Validation\ValidationException;
 
@@ -43,17 +44,19 @@ class TrainingSessionService
         array $data,
         int $trainerId
     ): TrainingSession {
-        $this->validateTrainerForAudience(
-            $data['audience'],
-            $trainerId
-        );
+        return DB::transaction(function () use ($data, $trainerId) {
+            $this->validateTrainerForAudience(
+                $data['audience'],
+                $trainerId
+            );
 
-        $session = $this->repository->create($data);
+            $session = $this->repository->create($data);
 
-        return $this->repository->syncTrainers(
-            $session,
-            [$trainerId]
-        );
+            return $this->repository->syncTrainers(
+                $session,
+                [$trainerId]
+            );
+        });
     }
 
     public function updateSession(
@@ -61,20 +64,26 @@ class TrainingSessionService
         array $data,
         int $trainerId
     ): TrainingSession {
-        $this->validateTrainerForAudience(
-            $data['audience'],
-            $trainerId
-        );
-
-        $session = $this->repository->update(
+        return DB::transaction(function () use (
             $trainingSession,
-            $data
-        );
+            $data,
+            $trainerId
+        ) {
+            $this->validateTrainerForAudience(
+                $data['audience'],
+                $trainerId
+            );
 
-        return $this->repository->syncTrainers(
-            $session,
-            [$trainerId]
-        );
+            $session = $this->repository->update(
+                $trainingSession,
+                $data
+            );
+
+            return $this->repository->syncTrainers(
+                $session,
+                [$trainerId]
+            );
+        });
     }
 
     private function validateTrainerForAudience(
@@ -93,15 +102,15 @@ class TrainingSessionService
             ]);
         }
 
-        $trainerExists = $this->trainerRepository
-            ->getActiveByGender($gender)
-            ->contains('id', $trainerId);
+        $trainer = $this->trainerRepository->findByIdForUpdate($trainerId);
 
-        if (! $trainerExists) {
+        $trainerMatches = $trainer
+            && $trainer->is_active
+            && $trainer->gender === $gender;
+
+        if (! $trainerMatches) {
             throw ValidationException::withMessages([
-                'trainer_id' => $audience === 'Men'
-                    ? 'يجب اختيار مدرب من مدربي الرجال.'
-                    : 'يجب اختيار مدربة من مدربات النساء.',
+                'trainer_id' => 'المدرب المختار لا يناسب نوع الجلسة أو أنه غير متاح حاليًا.',
             ]);
         }
     }

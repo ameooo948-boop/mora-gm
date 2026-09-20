@@ -2,14 +2,10 @@
 
 namespace App\Http\Requests\Admin\GymProfile;
 
-use Illuminate\Foundation\Http\FormRequest;
+use App\Http\Requests\Admin\AdminFormRequest;
 
-class UpdateGymProfileRequest extends FormRequest
+class UpdateGymProfileRequest extends AdminFormRequest
 {
-    public function authorize(): bool
-    {
-        return true;
-    }
 
     public function rules(): array
     {
@@ -26,7 +22,12 @@ class UpdateGymProfileRequest extends FormRequest
             'vision_title' => ['required', 'string', 'max:255'],
             'vision' => ['required', 'string', 'max:5000'],
 
-            'image' => ['nullable', 'string', 'max:255'],
+            'image' => [
+                'nullable',
+                'string',
+                'max:255',
+                'regex:/^(?!\/)(?!.*\.\.)[A-Za-z0-9_\/.\-]+$/',
+            ],
 
             'space_size' => ['required', 'integer', 'min:1', 'max:100000'],
             'trainer_count' => ['required', 'integer', 'min:0', 'max:1000'],
@@ -62,7 +63,9 @@ class UpdateGymProfileRequest extends FormRequest
             'trainer_count.min' => 'عدد المدربين لا يمكن أن يكون رقمًا سالبًا.',
 
             'email.email' => 'البريد الإلكتروني غير صحيح.',
-            'instagram_url.url' => 'رابط Instagram غير صحيح.',
+            'instagram_url.url' => 'رابط إنستجرام غير صحيح.',
+            'image.regex' => 'مسار الصورة غير صالح.',
+
         ];
     }
 }

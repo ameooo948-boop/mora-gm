@@ -3,10 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\RejectPaymentRequest;
 use App\Services\PaymentService;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 
 class PaymentController extends Controller
 {
@@ -35,24 +35,12 @@ class PaymentController extends Controller
     }
 
     public function reject(
-        Request $request,
+        RejectPaymentRequest $request,
         int $payment
     ): RedirectResponse {
-        $validated = $request->validate([
-            'notes' => [
-                'nullable',
-                'string',
-                'max:1000',
-            ],
-        ], [
-            'notes.string' => 'ملاحظات الرفض غير صحيحة.',
-
-            'notes.max' => 'ملاحظات الرفض طويلة جدًا.',
-        ]);
-
         $this->paymentService->rejectPayment(
             $payment,
-            $validated['notes'] ?? null
+            $request->validated('notes')
         );
 
         return back()->with(

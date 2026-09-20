@@ -18,23 +18,23 @@ class TrainerSeeder extends Seeder
             ->where('audience', 'Men')
             ->firstOrFail();
 
-        $femaleTrainer = Trainer::updateOrCreate(
+        $femaleTrainer = Trainer::firstOrCreate(
             ['slug' => 'mai-omar'],
             [
-                'name' => 'Mai Omar',
+                'name' => 'مي عمر',
                 'gender' => 'female',
                 'specialization' => 'تربية رياضية',
-                'bio' => 'مدرب لياقة مؤهل بخلفية في التربية الرياضية، يكرّس خبرته لمساعدة الأعضاء على التدريب باستمرار وتحقيق أهدافهم.',
+                'bio' => 'مدربة لياقة مؤهلة بخلفية في التربية الرياضية، تكرّس خبرتها لمساعدة العضوات على التدريب باستمرار وتحقيق أهدافهن.',
                 'image' => null,
                 'is_active' => true,
                 'sort_order' => 1,
             ]
         );
 
-        $maleTrainer = Trainer::updateOrCreate(
+        $maleTrainer = Trainer::firstOrCreate(
             ['slug' => 'mohamed-ramadan'],
             [
-                'name' => 'Mohamed Ramadan',
+                'name' => 'محمد رمضان',
                 'gender' => 'male',
                 'specialization' => 'تربية رياضية',
                 'bio' => 'مدرب لياقة مؤهل بخلفية في التربية الرياضية، يركز على مساعدة الأعضاء في بناء القوة والاستمرارية وعادات تدريب أفضل.',
@@ -44,12 +44,27 @@ class TrainerSeeder extends Seeder
             ]
         );
 
-        $ladiesSession->trainers()->sync([
-            $femaleTrainer->id,
-        ]);
+        $legacyFemaleNames = ['Mai Omar'];
+        if (in_array($femaleTrainer->name, $legacyFemaleNames, true)) {
+            $femaleTrainer->update([
+                'name' => 'مي عمر',
+                'bio' => 'مدربة لياقة مؤهلة بخلفية في التربية الرياضية، تكرّس خبرتها لمساعدة العضوات على التدريب باستمرار وتحقيق أهدافهن.',
+            ]);
+        }
 
-        $menSession->trainers()->sync([
-            $maleTrainer->id,
-        ]);
+        $legacyMaleNames = ['Mohamed Ramadan'];
+        if (in_array($maleTrainer->name, $legacyMaleNames, true)) {
+            $maleTrainer->update([
+                'name' => 'محمد رمضان',
+            ]);
+        }
+
+        if (! $ladiesSession->trainers()->whereKey($femaleTrainer->id)->exists()) {
+            $ladiesSession->trainers()->attach($femaleTrainer->id);
+        }
+
+        if (! $menSession->trainers()->whereKey($maleTrainer->id)->exists()) {
+            $menSession->trainers()->attach($maleTrainer->id);
+        }
     }
 }

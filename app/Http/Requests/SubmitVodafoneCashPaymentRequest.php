@@ -11,6 +11,14 @@ class SubmitVodafoneCashPaymentRequest extends FormRequest
         return $this->user() !== null;
     }
 
+    protected function prepareForValidation(): void
+    {
+        $this->merge([
+            'transaction_reference' => trim((string) $this->input('transaction_reference')),
+            'paid_at' => trim((string) $this->input('paid_at')),
+        ]);
+    }
+
     public function rules(): array
     {
         return [

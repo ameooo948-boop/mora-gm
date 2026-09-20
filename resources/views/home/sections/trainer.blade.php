@@ -30,14 +30,33 @@
                 <div class="relative aspect-[16/10] overflow-hidden bg-mora-surface">
 
                     @if ($trainer->image)
-                    <img src="{{ asset('storage/' . $trainer->image) }}" alt="{{ $trainer->name }}" class="h-full w-full object-cover transition duration-700 group-hover:scale-105">
+                    <img
+                        src="{{ asset('images/' . $trainer->image) }}"
+                        alt="{{ $trainer->name }}"
+                        class="h-full w-full object-cover transition duration-700 group-hover:scale-105"
+                        onerror="this.classList.add('hidden'); this.nextElementSibling.classList.remove('hidden');"
+                    >
+                    <div class="absolute inset-0 hidden items-center justify-center">
+
+                        <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(200,255,0,0.08),transparent_55%)]"></div>
+
+                        <span class="font-display select-none text-[11rem] font-bold leading-none text-white/[0.035] sm:text-[14rem]">
+                            {{ mb_strtoupper(mb_substr($trainer->name, 0, 1, 'UTF-8'), 'UTF-8') }}
+                        </span>
+
+                        <div class="absolute bottom-5 left-5">
+                            <span class="text-[10px] font-bold uppercase tracking-[0.35em] text-mora-accent">
+                                MORA GYM
+                            </span>
+                        </div>
+                    </div>
                     @else
                     <div class="absolute inset-0 flex items-center justify-center">
 
                         <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(200,255,0,0.08),transparent_55%)]"></div>
 
                         <span class="font-display select-none text-[11rem] font-bold leading-none text-white/[0.035] sm:text-[14rem]">
-                            {{ strtoupper(substr($trainer->name, 0, 1)) }}
+                            {{ mb_strtoupper(mb_substr($trainer->name, 0, 1, 'UTF-8'), 'UTF-8') }}
                         </span>
 
                         <div class="absolute bottom-5 left-5">

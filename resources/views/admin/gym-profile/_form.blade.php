@@ -63,7 +63,7 @@
 
             <div>
                 <label class="mb-2 block text-sm font-semibold text-white">
-                    مسار صورة About
+                    مسار صورة النبذة
                 </label>
 
                 <input type="text" name="image" dir="ltr" value="{{ old('image', $gymProfile->image ?? '') }}" placeholder="about/mora-gym.webp" class="w-full rounded-md border border-mora-border bg-mora-surface px-4 py-3 text-left text-white outline-none placeholder:text-mora-muted focus:border-mora-accent">
@@ -230,7 +230,7 @@
 
             <div>
                 <label class="mb-2 block text-sm font-semibold text-white">
-                    Instagram
+                    إنستجرام
                 </label>
 
                 <input type="url" name="instagram_url" dir="ltr" value="{{ old('instagram_url', $gymProfile->instagram_url ?? '') }}" placeholder="https://instagram.com/..." class="w-full rounded-md border border-mora-border bg-mora-surface px-4 py-3 text-left text-white outline-none placeholder:text-mora-muted focus:border-mora-accent">
@@ -242,7 +242,7 @@
 
             <div>
                 <label class="mb-2 block text-sm font-semibold text-white">
-                    رقم Vodafone Cash
+                    رقم فودافون كاش
                 </label>
 
                 <input type="text" name="vodafone_cash" dir="ltr" value="{{ old('vodafone_cash', $gymProfile->vodafone_cash ?? '') }}" placeholder="01xxxxxxxxx" class="w-full rounded-md border border-mora-border bg-mora-surface px-4 py-3 text-left text-white outline-none placeholder:text-mora-muted focus:border-mora-accent">

@@ -6,8 +6,10 @@ use App\Enums\PaymentStatus;
 use App\Enums\SubscriptionStatus;
 use App\Models\MembershipPlan;
 use App\Models\Subscription;
+use App\Repositories\Contracts\MembershipPlanRepositoryInterface;
 use App\Repositories\Contracts\PaymentRepositoryInterface;
 use App\Repositories\Contracts\SubscriptionRepositoryInterface;
+use App\Repositories\Contracts\UserRepositoryInterface;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\ValidationException;
@@ -16,7 +18,9 @@ class SubscriptionService
 {
     public function __construct(
         protected SubscriptionRepositoryInterface $repository,
+        protected MembershipPlanRepositoryInterface $membershipPlanRepository,
         protected PaymentRepositoryInterface $paymentRepository,
+        protected UserRepositoryInterface $userRepository,
         protected NotificationService $notificationService,
     ) {}
 
@@ -40,26 +44,55 @@ class SubscriptionService
         int $userId,
         MembershipPlan $plan
     ): Subscription {
-        if ($this->repository->findActiveByUser($userId)) {
-            throw ValidationException::withMessages([
-                'subscription' => 'لديك عضوية فعالة بالفعل.',
-            ]);
-        }
-
-        if ($this->repository->findPendingByUser($userId)) {
-            throw ValidationException::withMessages([
-                'subscription' => 'لديك طلب اشتراك قيد الانتظار بالفعل.',
-            ]);
-        }
-
         $subscription = DB::transaction(function () use (
             $userId,
             $plan
         ) {
+            $user = $this->userRepository->findByIdForUpdate($userId);
+
+            if (! $user) {
+                throw ValidationException::withMessages([
+                    'subscription' => 'الحساب المطلوب غير موجود.',
+                ]);
+            }
+
+            $plan = $this->membershipPlanRepository->findByIdForUpdate($plan->id);
+
+            if (! $plan) {
+                throw ValidationException::withMessages([
+                    'subscription' => 'الباقة المطلوبة غير موجودة.',
+                ]);
+            }
+
+            if (! $plan->is_active || $plan->price === null) {
+                throw ValidationException::withMessages([
+                    'subscription' => 'هذه الباقة غير متاحة للاشتراك حاليًا.',
+                ]);
+            }
+
+            if ($plan->duration_days < 1) {
+                throw ValidationException::withMessages([
+                    'subscription' => 'مدة الباقة غير صالحة للاشتراك.',
+                ]);
+            }
+
+            if ($this->repository->findActiveByUser($userId)) {
+                throw ValidationException::withMessages([
+                    'subscription' => 'لديك عضوية فعالة بالفعل.',
+                ]);
+            }
+
+            if ($this->repository->findPendingByUser($userId)) {
+                throw ValidationException::withMessages([
+                    'subscription' => 'لديك طلب اشتراك قيد الانتظار بالفعل.',
+                ]);
+            }
+
             $subscription = $this->repository->create([
                 'user_id' => $userId,
                 'membership_plan_id' => $plan->id,
                 'price' => $plan->price,
+                'duration_days' => $plan->duration_days,
                 'starts_at' => null,
                 'ends_at' => null,
                 'status' => SubscriptionStatus::PENDING,
@@ -82,7 +115,7 @@ class SubscriptionService
         $this->notificationService->create(
             userId: $userId,
             title: 'تم إنشاء طلب الاشتراك',
-            message: "تم إنشاء طلب اشتراكك في باقة {$plan->name}. برجاء إتمام الدفع عبر فودافون كاش.",
+            message: "تم إنشاء طلب اشتراكك في باقة {$subscription->membershipPlan->name}. برجاء إتمام الدفع عبر فودافون كاش.",
             type: 'subscription',
             actionUrl: $subscription->payment
                 ? route(

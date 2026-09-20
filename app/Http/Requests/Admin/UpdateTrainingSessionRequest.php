@@ -2,13 +2,19 @@
 
 namespace App\Http\Requests\Admin;
 
-use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateTrainingSessionRequest extends FormRequest
+class UpdateTrainingSessionRequest extends AdminFormRequest
 {
-    public function authorize(): bool
+
+
+    protected function prepareForValidation(): void
     {
-        return auth()->check() && auth()->user()->isAdmin();
+        $this->merge([
+            'name' => trim((string) $this->input('name')),
+            'description' => $this->filled('description')
+                ? trim((string) $this->input('description'))
+                : null,
+        ]);
     }
 
     public function rules(): array
@@ -39,6 +45,7 @@ class UpdateTrainingSessionRequest extends FormRequest
             'ends_at' => [
                 'required',
                 'date_format:H:i',
+                'different:starts_at',
             ],
 
             'description' => [
@@ -79,6 +86,7 @@ class UpdateTrainingSessionRequest extends FormRequest
 
             'ends_at.required' => 'وقت نهاية الجلسة مطلوب.',
             'ends_at.date_format' => 'وقت النهاية يجب أن يكون بصيغة صحيحة.',
+            'ends_at.different' => 'وقت النهاية يجب أن يختلف عن وقت البداية.',
 
             'description.string' => 'وصف الجلسة غير صحيح.',
             'description.max' => 'وصف الجلسة طويل جدًا.',

@@ -47,7 +47,7 @@ class MemberController extends Controller
             abort(404);
         }
 
-        $this->userService->updateProfile(
+        $this->userService->updateMember(
             $user,
             $request->validated()
         );

@@ -7,7 +7,7 @@
     {{-- Background Image --}}
     <div class="absolute inset-0 -z-10">
 
-        <img src="{{ asset('images/hero/gym-hero.webp') }}" alt="MORA Gym" class="h-full w-full object-cover object-center">
+        <img src="{{ asset('images/hero/gym-hero.webp') }}" alt="MORA GYM" class="h-full w-full object-cover object-center">
 
         {{-- Overall dark overlay --}}
         <div class="absolute inset-0 bg-black/50"></div>
@@ -94,7 +94,7 @@
 
             <div class="px-5 py-5 sm:px-8 lg:px-10">
                 <p class="font-display text-2xl font-semibold sm:text-3xl">
-                    150<span class="text-mora-accent">m²</span>
+                    {{ $gymProfile?->space_size ?? 150 }}<span class="text-mora-accent">م²</span>
                 </p>
 
                 <p class="mt-1 text-[9px] uppercase tracking-[0.2em] text-white/45 sm:text-[10px]">
@@ -116,7 +116,7 @@
 
             <div class="px-5 py-5 sm:px-8 lg:px-10">
                 <p class="font-display text-2xl font-semibold sm:text-3xl">
-                    02
+                    {{ str_pad($trainingSessions->count(), 2, '0', STR_PAD_LEFT) }}
                 </p>
 
                 <p class="mt-1 text-[9px] uppercase tracking-[0.2em] text-white/45 sm:text-[10px]">
@@ -154,8 +154,8 @@
             </div>
 
             <p class="max-w-md text-sm leading-7 text-mora-muted lg:justify-self-end lg:pb-2">
-                Two dedicated daily sessions designed to give every member
-                a focused and comfortable training environment.
+                مواعيد تدريب يومية مخصصة لتوفير بيئة تدريب مريحة ومركزة
+                تساعد كل عضو على الالتزام والتقدم.
             </p>
 
         </div>
@@ -182,7 +182,7 @@
                     </span>
 
                     <span class="border border-mora-accent/30 px-3 py-1.5 text-[9px] font-semibold uppercase tracking-[0.2em] text-mora-accent">
-                        {{ $session->audience }}
+                        {{ $session->audience === 'Women' ? 'السيدات' : 'الرجال' }}
                     </span>
 
                 </div>

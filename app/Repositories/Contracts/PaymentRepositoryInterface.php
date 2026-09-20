@@ -11,7 +11,14 @@ interface PaymentRepositoryInterface
 
     public function findById(int $id): ?Payment;
 
+    public function findByIdForUpdate(int $id): ?Payment;
+
     public function findByIdForUser(
+        int $id,
+        int $userId
+    ): ?Payment;
+
+    public function findByIdForUserForUpdate(
         int $id,
         int $userId
     ): ?Payment;

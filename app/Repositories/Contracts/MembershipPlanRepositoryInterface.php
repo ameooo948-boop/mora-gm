@@ -17,6 +17,8 @@ interface MembershipPlanRepositoryInterface
 
     public function findById(int $id): ?MembershipPlan;
 
+    public function findByIdForUpdate(int $id): ?MembershipPlan;
+
     public function create(array $data): MembershipPlan;
 
     public function update(

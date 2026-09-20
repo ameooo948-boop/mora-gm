@@ -30,6 +30,19 @@ class PaymentRepository implements PaymentRepositoryInterface
             ->find($id);
     }
 
+    public function findByIdForUpdate(int $id): ?Payment
+    {
+        return $this->model
+            ->newQuery()
+            ->whereKey($id)
+            ->with([
+                'user',
+                'subscription.membershipPlan',
+            ])
+            ->lockForUpdate()
+            ->first();
+    }
+
     public function findByIdForUser(
         int $id,
         int $userId
@@ -41,6 +54,21 @@ class PaymentRepository implements PaymentRepositoryInterface
             ])
             ->where('id', $id)
             ->where('user_id', $userId)
+            ->first();
+    }
+
+    public function findByIdForUserForUpdate(
+        int $id,
+        int $userId
+    ): ?Payment {
+        return $this->model
+            ->newQuery()
+            ->with([
+                'subscription.membershipPlan',
+            ])
+            ->where('id', $id)
+            ->where('user_id', $userId)
+            ->lockForUpdate()
             ->first();
     }
 

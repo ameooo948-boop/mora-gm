@@ -41,7 +41,7 @@
         <input type="text" id="image" name="image" value="{{ old('image', $item->image ?? '') }}" required class="w-full rounded-md border border-mora-border bg-mora-card px-4 py-3 text-mora-text outline-none transition focus:border-mora-accent" placeholder="مثال: gallery/gym-1.webp">
 
         <p class="mt-2 text-xs text-mora-muted">
-            اكتب مسار الصورة الموجود داخل مجلد public.
+            اكتب مسار الصورة الموجود داخل مجلد الصور داخل public.
         </p>
 
         @error('image')

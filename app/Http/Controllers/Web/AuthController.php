@@ -70,9 +70,17 @@ class AuthController extends Controller
             );
         }
 
-        return redirect()->intended(
-            route('member.dashboard')
-        );
+        if ($user->isMember()) {
+            return redirect()->intended(
+                route('member.dashboard')
+            );
+        }
+
+        Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
+        abort(403, 'نوع الحساب غير مسموح به.');
     }
 
     public function logout(): RedirectResponse

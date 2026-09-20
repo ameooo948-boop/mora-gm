@@ -9,6 +9,8 @@ use App\Repositories\Contracts\AttendanceRepositoryInterface;
 use App\Repositories\Contracts\UserRepositoryInterface;
 use Carbon\Carbon;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
+use Illuminate\Database\UniqueConstraintViolationException;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\ValidationException;
 
 class AttendanceService
@@ -45,6 +47,12 @@ class AttendanceService
             $trainingSession
         );
 
+        if (! $trainingSession->is_active) {
+            throw ValidationException::withMessages([
+                'attendance' => 'هذه الجلسة غير متاحة حاليًا.',
+            ]);
+        }
+
         $this->ensureSessionIsOpen(
             $trainingSession,
             $now
@@ -55,24 +63,37 @@ class AttendanceService
             $now
         );
 
-        $existing = $this->repository->findForUserAndDate(
-            $userId,
-            $trainingSession->id,
-            $attendanceDate->toDateString()
-        );
+        try {
+            return DB::transaction(function () use (
+                $userId,
+                $trainingSession,
+                $attendanceDate,
+                $now
+            ) {
+                $existing = $this->repository->findForUserAndDate(
+                    $userId,
+                    $trainingSession->id,
+                    $attendanceDate->toDateString()
+                );
 
-        if ($existing) {
+                if ($existing) {
+                    throw ValidationException::withMessages([
+                        'attendance' => 'تم تسجيل حضورك لهذه الجلسة بالفعل.',
+                    ]);
+                }
+
+                return $this->repository->create([
+                    'user_id' => $userId,
+                    'training_session_id' => $trainingSession->id,
+                    'attendance_date' => $attendanceDate->toDateString(),
+                    'checked_in_at' => $now,
+                ]);
+            });
+        } catch (UniqueConstraintViolationException) {
             throw ValidationException::withMessages([
                 'attendance' => 'تم تسجيل حضورك لهذه الجلسة بالفعل.',
             ]);
         }
-
-        return $this->repository->create([
-            'user_id' => $userId,
-            'training_session_id' => $trainingSession->id,
-            'attendance_date' => $attendanceDate->toDateString(),
-            'checked_in_at' => $now,
-        ]);
     }
 
     public function checkOut(
@@ -98,27 +119,34 @@ class AttendanceService
             $now
         );
 
-        $attendance = $this->repository->findForUserAndDate(
+        return DB::transaction(function () use (
             $userId,
-            $trainingSession->id,
-            $attendanceDate->toDateString()
-        );
+            $trainingSession,
+            $attendanceDate,
+            $now
+        ) {
+            $attendance = $this->repository->findForUserAndDateForUpdate(
+                $userId,
+                $trainingSession->id,
+                $attendanceDate->toDateString()
+            );
 
-        if (! $attendance) {
-            throw ValidationException::withMessages([
-                'attendance' => 'لم يتم تسجيل حضورك لهذه الجلسة.',
+            if (! $attendance) {
+                throw ValidationException::withMessages([
+                    'attendance' => 'لم يتم تسجيل حضورك لهذه الجلسة.',
+                ]);
+            }
+
+            if ($attendance->checked_out_at) {
+                throw ValidationException::withMessages([
+                    'attendance' => 'تم تسجيل الانصراف لهذه الجلسة بالفعل.',
+                ]);
+            }
+
+            return $this->repository->update($attendance, [
+                'checked_out_at' => $now,
             ]);
-        }
-
-        if ($attendance->checked_out_at) {
-            throw ValidationException::withMessages([
-                'attendance' => 'تم تسجيل الانصراف لهذه الجلسة بالفعل.',
-            ]);
-        }
-
-        return $this->repository->update($attendance, [
-            'checked_out_at' => $now,
-        ]);
+        });
     }
 
     protected function ensureActiveMembership(int $userId): void
@@ -151,19 +179,14 @@ class AttendanceService
         );
 
         if ($end->lessThanOrEqualTo($start)) {
-            $end->addDay();
+            if ($now->lessThanOrEqualTo($end)) {
+                $start->subDay();
+            } else {
+                $end->addDay();
+            }
         }
 
-        $checkNow = $now->copy();
-
-        if (
-            $now->format('H:i:s') < $session->ends_at
-            && $end->isTomorrow()
-        ) {
-            $start->subDay();
-        }
-
-        if (! $checkNow->betweenIncluded($start, $end)) {
+        if (! $now->betweenIncluded($start, $end)) {
             throw ValidationException::withMessages([
                 'attendance' => 'تسجيل الحضور متاح فقط خلال مواعيد الجلسة.',
             ]);
@@ -192,7 +215,7 @@ class AttendanceService
 
         if (
             $endMinutes <= $startMinutes
-            && $currentMinutes < $endMinutes
+            && $currentMinutes <= $endMinutes
         ) {
             return $now->copy()->subDay()->startOfDay();
         }

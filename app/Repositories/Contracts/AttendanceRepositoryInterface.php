@@ -13,6 +13,12 @@ interface AttendanceRepositoryInterface
         string $date
     ): ?Attendance;
 
+    public function findForUserAndDateForUpdate(
+        int $userId,
+        int $trainingSessionId,
+        string $date
+    ): ?Attendance;
+
     public function create(array $data): Attendance;
 
     public function update(

@@ -61,7 +61,7 @@ class GalleryItemSeeder extends Seeder
         ];
 
         foreach ($items as $item) {
-            GalleryItem::updateOrCreate(
+            GalleryItem::firstOrCreate(
                 ['image' => $item['image']],
                 $item
             );

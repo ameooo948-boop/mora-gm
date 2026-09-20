@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Models\User;
 use App\Repositories\Contracts\UserRepositoryInterface;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Hash;
 
 class AuthService
@@ -32,6 +33,15 @@ class AuthService
                 'password' => $password,
             ],
             $remember
+        );
+    }
+
+    public function resetPassword(User $user, string $password): void
+    {
+        $this->userRepository->updatePassword(
+            $user,
+            $password,
+            Str::random(60)
         );
     }
 

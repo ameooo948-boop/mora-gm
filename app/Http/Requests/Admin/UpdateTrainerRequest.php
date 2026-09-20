@@ -2,14 +2,25 @@
 
 namespace App\Http\Requests\Admin;
 
-use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
-class UpdateTrainerRequest extends FormRequest
+class UpdateTrainerRequest extends AdminFormRequest
 {
-    public function authorize(): bool
+
+
+    protected function prepareForValidation(): void
     {
-        return true;
+        $this->merge([
+            'name' => trim((string) $this->input('name')),
+            'slug' => strtolower(trim((string) $this->input('slug'))),
+            'specialization' => trim((string) $this->input('specialization')),
+            'bio' => $this->filled('bio')
+                ? trim((string) $this->input('bio'))
+                : null,
+            'image' => $this->filled('image')
+                ? trim((string) $this->input('image'))
+                : null,
+        ]);
     }
 
     public function rules(): array
@@ -25,6 +36,7 @@ class UpdateTrainerRequest extends FormRequest
                 'required',
                 'string',
                 'max:255',
+                'regex:/^[a-z0-9]+(?:-[a-z0-9]+)*$/',
                 Rule::unique('trainers', 'slug')->ignore($this->route('trainer')),
             ],
 

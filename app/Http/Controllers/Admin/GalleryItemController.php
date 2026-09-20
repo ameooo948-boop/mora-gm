@@ -18,9 +18,12 @@ class GalleryItemController extends Controller
 
     public function index(Request $request): View
     {
+        $category = $request->string('category')->trim()->value() ?: null;
+        $search = $request->string('search')->trim()->value() ?: null;
+
         $items = $this->service->getAllItems(
-            $request->input('category'),
-            $request->input('search')
+            $category,
+            $search
         );
 
         return view('admin.gallery.index', [

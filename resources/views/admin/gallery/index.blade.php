@@ -74,9 +74,19 @@
         <article class="overflow-hidden rounded-xl border border-mora-border bg-mora-surface">
 
             {{-- Image --}}
-            <div class="aspect-[4/3] overflow-hidden bg-mora-card">
+            <div class="relative aspect-[4/3] overflow-hidden bg-mora-card">
 
-                <img src="{{ asset($item->image) }}" alt="{{ $item->title }}" class="h-full w-full object-cover transition duration-500 hover:scale-105" loading="lazy">
+                <img
+                    src="{{ asset('images/' . ltrim($item->image, '/')) }}"
+                    alt="{{ $item->title }}"
+                    class="h-full w-full object-cover transition duration-500 hover:scale-105"
+                    loading="lazy"
+                    onerror="this.classList.add('hidden'); this.nextElementSibling.classList.remove('hidden');"
+                >
+
+                <div class="absolute inset-0 hidden items-center justify-center bg-[radial-gradient(circle_at_center,rgba(200,255,0,0.08),transparent_55%)]">
+                    <span class="font-display text-7xl font-bold tracking-tight text-white/[0.05]">MORA</span>
+                </div>
 
             </div>
 

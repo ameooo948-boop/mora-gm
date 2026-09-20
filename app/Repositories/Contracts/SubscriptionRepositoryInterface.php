@@ -36,6 +36,8 @@ interface SubscriptionRepositoryInterface
 
     public function findById(int $id): ?Subscription;
 
+    public function findByIdForUpdate(int $id): ?Subscription;
+
     public function getExpiringSubscriptions(): Collection;
 
     public function getExpiredSubscriptions(): Collection;

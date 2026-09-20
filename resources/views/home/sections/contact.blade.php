@@ -9,7 +9,7 @@
 
             <h2 class="font-display text-4xl font-semibold uppercase leading-none tracking-tight text-mora-text sm:text-5xl md:text-6xl">
                 اعرف طريقك
-                <span class="text-mora-accent">To MORA.</span>
+                <span class="text-mora-accent">إلى MORA.</span>
             </h2>
         </div>
 
@@ -24,8 +24,8 @@
                     </span>
 
                     <p class="mt-4 max-w-lg text-sm leading-7 text-mora-muted">
-                        A focused training space built around discipline,
-                        consistency, and real progress.
+                        مساحة تدريبية مركزة تقوم على الانضباط،
+                        والاستمرارية، والتقدم الحقيقي.
                     </p>
                 </div>
 
@@ -84,7 +84,7 @@
                 @if ($gymProfile?->instagram_url)
                 <div class="mt-4">
                     <a href="{{ $gymProfile->instagram_url }}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-3 rounded-[6px] border border-mora-border px-5 py-3 text-xs font-bold uppercase tracking-wide text-mora-text transition hover:border-mora-accent hover:text-mora-accent">
-                        تابع MORA على Instagram
+                        تابع MORA على إنستجرام
                         <span>↗</span>
                     </a>
                 </div>
@@ -105,7 +105,7 @@
 
                 <div class="mt-8 divide-y divide-mora-border">
 
-                    @foreach ($trainingSessions as $session)
+                    @forelse ($trainingSessions as $session)
                     <div class="py-5 first:pt-0 last:pb-0">
 
                         <div class="mb-2 flex items-center justify-between gap-4">
@@ -117,7 +117,7 @@
                         </div>
 
                         <p class="text-xs uppercase tracking-wide text-mora-muted">
-                            {{ $session->audience }}
+                            {{ $session->audience === 'Women' ? 'السيدات' : 'الرجال' }}
                         </p>
 
                         <p class="mt-2 text-sm font-semibold text-mora-text">
@@ -132,7 +132,9 @@
                         </p>
 
                     </div>
-                    @endforeach
+                    @empty
+                    <p class="py-5 text-sm text-mora-muted">مواعيد التدريب غير متاحة حاليًا.</p>
+                    @endforelse
 
                 </div>
 

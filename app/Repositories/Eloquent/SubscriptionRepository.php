@@ -131,6 +131,20 @@ class SubscriptionRepository implements SubscriptionRepositoryInterface
             ->find($id);
     }
 
+    public function findByIdForUpdate(int $id): ?Subscription
+    {
+        return $this->model
+            ->newQuery()
+            ->whereKey($id)
+            ->with([
+                'user',
+                'membershipPlan',
+                'payment',
+            ])
+            ->lockForUpdate()
+            ->first();
+    }
+
     public function getExpiringSubscriptions(): Collection
     {
         return $this->model

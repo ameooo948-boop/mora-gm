@@ -13,7 +13,7 @@
             </a>
 
             <p class="mt-8 text-xs font-bold uppercase tracking-[0.25em] text-mora-accent">
-                NEW PASSWORD.
+                كلمة مرور جديدة.
             </p>
 
             <h1 class="mt-3 font-display text-4xl font-semibold uppercase">

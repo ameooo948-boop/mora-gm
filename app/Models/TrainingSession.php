@@ -31,21 +31,24 @@ class TrainingSession extends Model
     public function getFormattedStartTimeAttribute(): ?string
     {
         return $this->starts_at
-            ? Carbon::createFromFormat('H:i:s', $this->starts_at)->format('g:i A')
+            ? Carbon::createFromFormat('H:i:s', $this->starts_at)
+                ->locale('ar')
+                ->translatedFormat('g:i a')
             : null;
     }
 
     public function getFormattedEndTimeAttribute(): ?string
     {
         return $this->ends_at
-            ? Carbon::createFromFormat('H:i:s', $this->ends_at)->format('g:i A')
+            ? Carbon::createFromFormat('H:i:s', $this->ends_at)
+                ->locale('ar')
+                ->translatedFormat('g:i a')
             : null;
     }
 
     public function getEndsNextDayAttribute(): bool
     {
-        return $this->ends_at !== null
-            && substr($this->ends_at, 0, 5) === '03:00';
+        return $this->endsNextDay();
     }
 
     public function scopeActive(Builder $query): Builder

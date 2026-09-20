@@ -2,13 +2,23 @@
 
 namespace App\Http\Requests\Admin;
 
-use Illuminate\Foundation\Http\FormRequest;
 
-class StoreMembershipPlanRequest extends FormRequest
+class StoreMembershipPlanRequest extends AdminFormRequest
 {
-    public function authorize(): bool
+
+
+    protected function prepareForValidation(): void
     {
-        return true;
+        $this->merge([
+            'name' => trim((string) $this->input('name')),
+            'slug' => strtolower(trim((string) $this->input('slug'))),
+            'short_description' => $this->filled('short_description')
+                ? trim((string) $this->input('short_description'))
+                : null,
+            'description' => $this->filled('description')
+                ? trim((string) $this->input('description'))
+                : null,
+        ]);
     }
 
     public function rules(): array
@@ -24,6 +34,7 @@ class StoreMembershipPlanRequest extends FormRequest
                 'required',
                 'string',
                 'max:255',
+                'regex:/^[a-z0-9]+(?:-[a-z0-9]+)*$/',
                 'unique:membership_plans,slug',
             ],
 

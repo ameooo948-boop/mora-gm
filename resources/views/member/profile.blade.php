@@ -66,29 +66,17 @@
                 </div>
 
                 <div>
-                    <label for="gender" class="mb-2 block text-sm font-medium text-mora-text">
+                    <label class="mb-2 block text-sm font-medium text-mora-text">
                         النوع
                     </label>
 
-                    <select id="gender" name="gender" required class="w-full rounded-md border border-mora-border bg-mora-surface px-4 py-3 text-sm text-mora-text outline-none transition focus:border-mora-accent">
-                        <option value="">اختر النوع</option>
+                    <div class="w-full rounded-md border border-mora-border bg-mora-surface px-4 py-3 text-sm text-mora-muted">
+                        {{ $user->gender?->label() ?? 'غير محدد' }}
+                    </div>
 
-                        <option value="male" @selected(old('gender', $user->gender?->value) === 'male')
-                            >
-                            ذكر
-                        </option>
-
-                        <option value="female" @selected(old('gender', $user->gender?->value) === 'female')
-                            >
-                            أنثى
-                        </option>
-                    </select>
-
-                    @error('gender')
-                    <p class="mt-2 text-xs text-red-400">
-                        {{ $message }}
+                    <p class="mt-2 text-xs leading-6 text-mora-muted">
+                        لا يمكن تغيير النوع من الملف الشخصي، ويُستخدم لتحديد الجلسات المناسبة لك.
                     </p>
-                    @enderror
                 </div>
 
             </div>

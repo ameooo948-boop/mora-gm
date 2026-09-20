@@ -9,7 +9,9 @@ class GymProfileSeeder extends Seeder
 {
     public function run(): void
     {
-        GymProfile::query()->delete();
+        if (GymProfile::query()->exists()) {
+            return;
+        }
 
         GymProfile::create([
             'name' => 'MORA GYM',

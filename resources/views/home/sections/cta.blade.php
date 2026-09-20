@@ -11,19 +11,19 @@
                 </p>
 
                 <h2 class="font-display text-5xl font-semibold uppercase leading-[0.9] tracking-tight text-mora-text sm:text-6xl md:text-7xl lg:text-8xl">
-                    Ready To
-                    <span class="text-mora-accent">Get Stronger?</span>
+                    جاهز لـ
+                    <span class="text-mora-accent">تكون أقوى؟</span>
                 </h2>
 
                 <p class="mt-7 max-w-2xl text-sm leading-7 text-mora-muted sm:text-base">
-                    Stop waiting for the perfect time.
-                    Start training, stay consistent, and build your stronger self at MORA.
+                    لا تنتظر الوقت المثالي.
+                    ابدأ التدريب، حافظ على استمراريتك، وابنِ نسختك الأقوى مع MORA.
                 </p>
 
                 <div class="mt-9 flex flex-col gap-3 sm:flex-row">
 
                     <a href="#contact" class="inline-flex items-center justify-center gap-4 rounded-[6px] bg-mora-accent px-7 py-4 text-sm font-bold uppercase tracking-wide text-black transition hover:bg-mora-accent-hover">
-                        Join MORA
+                        انضم إلى MORA
                         <span class="text-lg">→</span>
                     </a>
 

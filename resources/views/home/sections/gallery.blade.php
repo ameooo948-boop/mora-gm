@@ -23,12 +23,22 @@
         {{-- Gallery --}}
         <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
 
-            @foreach ($galleryItems as $item)
+            @forelse ($galleryItems as $item)
             <article class="{{ $loop->first ? 'md:row-span-2' : '' }} group relative overflow-hidden rounded-[10px] border border-mora-border bg-mora-card">
 
                 <div class="{{ $loop->first ? 'aspect-[4/5] md:h-full' : 'aspect-[16/10]' }} relative overflow-hidden">
 
-                    <img src="{{ asset('images/' . $item->image) }}" alt="{{ $item->title }}" class="h-full w-full object-cover transition duration-700 group-hover:scale-105" loading="lazy">
+                    <img
+                        src="{{ asset('images/' . $item->image) }}"
+                        alt="{{ $item->title }}"
+                        class="h-full w-full object-cover transition duration-700 group-hover:scale-105"
+                        loading="lazy"
+                        onerror="this.classList.add('hidden'); this.nextElementSibling.classList.remove('hidden');"
+                    >
+
+                    <div class="absolute inset-0 hidden items-center justify-center bg-[radial-gradient(circle_at_center,rgba(200,255,0,0.08),transparent_55%)]">
+                        <span class="font-display text-7xl font-bold tracking-tight text-white/[0.05]">MORA</span>
+                    </div>
 
                     <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/10 to-transparent"></div>
 
@@ -58,7 +68,13 @@
                 </div>
 
             </article>
-            @endforeach
+            @empty
+                <div class="col-span-full border border-dashed border-mora-border bg-mora-card px-6 py-16 text-center">
+                    <p class="text-sm text-mora-muted">
+                        معرض الصور غير متاح حاليًا.
+                    </p>
+                </div>
+            @endforelse
 
         </div>
 

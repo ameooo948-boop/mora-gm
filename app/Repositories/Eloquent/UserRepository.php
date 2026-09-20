@@ -32,6 +32,15 @@ class UserRepository implements UserRepositoryInterface
             ->find($id);
     }
 
+    public function findByIdForUpdate(int $id): ?User
+    {
+        return $this->model
+            ->newQuery()
+            ->whereKey($id)
+            ->lockForUpdate()
+            ->first();
+    }
+
     public function countMembers(): int
     {
         return $this->model
@@ -89,6 +98,28 @@ class UserRepository implements UserRepositoryInterface
         array $data
     ): User {
         $user->update($data);
+
+        return $user->fresh();
+    }
+
+    public function updateMember(
+        User $user,
+        array $data
+    ): User {
+        $user->update($data);
+
+        return $user->fresh();
+    }
+
+    public function updatePassword(
+        User $user,
+        string $password,
+        string $rememberToken
+    ): User {
+        $user->forceFill([
+            'password' => $password,
+            'remember_token' => $rememberToken,
+        ])->save();
 
         return $user->fresh();
     }
