@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\Admin\MemberController;
+use App\Http\Controllers\Admin\MembershipPlanController;
 use App\Http\Controllers\Admin\PaymentController as AdminPaymentController;
 use App\Http\Controllers\Admin\SubscriptionController as AdminSubscriptionController;
 use App\Http\Controllers\Admin\TrainerController;
@@ -155,6 +156,10 @@ Route::middleware(['auth', 'role:admin'])
 
         Route::put('/trainers/{trainer}', [TrainerController::class, 'update'])
             ->name('trainers.update');
+
+        Route::resource('membership-plans', MembershipPlanController::class)
+            ->only(['index', 'create', 'store', 'edit', 'update'])
+            ->names('membership-plans');
     });
 
 Route::middleware('auth')->group(function () {
