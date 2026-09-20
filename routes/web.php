@@ -4,6 +4,8 @@ use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\Admin\MemberController;
 use App\Http\Controllers\Admin\PaymentController as AdminPaymentController;
 use App\Http\Controllers\Admin\SubscriptionController as AdminSubscriptionController;
+use App\Http\Controllers\Admin\TrainerController;
+use App\Http\Controllers\Admin\TrainingSessionController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Member\AttendanceController;
 use App\Http\Controllers\Member\DashboardController as MemberDashboardController;
@@ -123,6 +125,36 @@ Route::middleware(['auth', 'role:admin'])
             MemberController::class,
             'update',
         ])->name('members.update');
+
+        Route::get('/training-sessions', [TrainingSessionController::class, 'index'])
+            ->name('training-sessions.index');
+
+        Route::get('/training-sessions/create', [TrainingSessionController::class, 'create'])
+            ->name('training-sessions.create');
+
+        Route::post('/training-sessions', [TrainingSessionController::class, 'store'])
+            ->name('training-sessions.store');
+
+        Route::get('/training-sessions/{trainingSession}/edit', [TrainingSessionController::class, 'edit'])
+            ->name('training-sessions.edit');
+
+        Route::put('/training-sessions/{trainingSession}', [TrainingSessionController::class, 'update'])
+            ->name('training-sessions.update');
+
+        Route::get('/trainers', [TrainerController::class, 'index'])
+            ->name('trainers.index');
+
+        Route::get('/trainers/create', [TrainerController::class, 'create'])
+            ->name('trainers.create');
+
+        Route::post('/trainers', [TrainerController::class, 'store'])
+            ->name('trainers.store');
+
+        Route::get('/trainers/{trainer}/edit', [TrainerController::class, 'edit'])
+            ->name('trainers.edit');
+
+        Route::put('/trainers/{trainer}', [TrainerController::class, 'update'])
+            ->name('trainers.update');
     });
 
 Route::middleware('auth')->group(function () {

@@ -55,6 +55,15 @@ class TrainingSession extends Model
             ->orderBy('sort_order');
     }
 
+    public function endsNextDay(): bool
+    {
+        if (! $this->starts_at || ! $this->ends_at) {
+            return false;
+        }
+
+        return $this->ends_at <= $this->starts_at;
+    }
+
     public function trainers(): BelongsToMany
     {
         return $this->belongsToMany(
