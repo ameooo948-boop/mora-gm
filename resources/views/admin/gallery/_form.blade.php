@@ -31,21 +31,33 @@
         <p class="mt-2 text-sm text-red-400">{{ $message }}</p>
         @enderror
     </div>
-
-    {{-- مسار الصورة --}}
+    
+    {{-- الصورة --}}
     <div>
         <label for="image" class="mb-2 block text-sm font-medium text-mora-text">
-            مسار الصورة
+            {{ $mode === 'edit' ? 'تغيير الصورة' : 'الصورة' }}
         </label>
 
-        <input type="text" id="image" name="image" value="{{ old('image', $item->image ?? '') }}" required class="w-full rounded-md border border-mora-border bg-mora-card px-4 py-3 text-mora-text outline-none transition focus:border-mora-accent" placeholder="مثال: gallery/gym-1.webp">
+        <input type="file" id="image" name="image" accept=".jpg,.jpeg,.png,.webp,image/jpeg,image/png,image/webp" @required($mode==='create' ) class="block w-full cursor-pointer rounded-md border border-mora-border bg-mora-card text-sm text-mora-muted file:mr-4 file:border-0 file:bg-mora-accent file:px-5 file:py-3 file:font-semibold file:text-mora-bg hover:file:bg-mora-accent-hover">
 
         <p class="mt-2 text-xs text-mora-muted">
-            اكتب مسار الصورة الموجود داخل مجلد الصور داخل public.
+            الصيغ المسموحة: JPG, JPEG, PNG, WEBP — الحد الأقصى 5 ميجابايت.
         </p>
 
+        @if($mode === 'edit' && !empty($item?->image))
+        <div class="mt-4">
+            <p class="mb-2 text-sm text-mora-muted">
+                الصورة الحالية
+            </p>
+
+            <img src="{{ asset('storage/' . $item->image) }}" alt="{{ $item->title }}" class="h-40 w-full rounded-lg object-cover md:w-64">
+        </div>
+        @endif
+
         @error('image')
-        <p class="mt-2 text-sm text-red-400">{{ $message }}</p>
+        <p class="mt-2 text-sm text-red-400">
+            {{ $message }}
+        </p>
         @enderror
     </div>
 

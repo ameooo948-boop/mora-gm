@@ -2,11 +2,8 @@
 
 namespace App\Http\Requests\Admin;
 
-
 class UpdateGalleryItemRequest extends AdminFormRequest
 {
-
-
     protected function prepareForValidation(): void
     {
         $this->merge([
@@ -25,11 +22,12 @@ class UpdateGalleryItemRequest extends AdminFormRequest
             'title' => ['required', 'string', 'max:255'],
             'category' => ['required', 'string', 'max:100'],
             'image' => [
-                'required',
-                'string',
-                'max:500',
-                'regex:/^(?!\/)(?!.*\.\.)[A-Za-z0-9_\/.\-]+$/',
+                'nullable',
+                'image',
+                'mimes:jpg,jpeg,png,webp',
+                'max:5120',
             ],
+
             'description' => ['nullable', 'string', 'max:2000'],
             'is_active' => ['nullable', 'boolean'],
             'sort_order' => ['nullable', 'integer', 'min:0', 'max:999'],
@@ -47,9 +45,9 @@ class UpdateGalleryItemRequest extends AdminFormRequest
             'category.string' => 'التصنيف يجب أن يكون نصًا.',
             'category.max' => 'التصنيف يجب ألا يتجاوز 100 حرف.',
 
-            'image.required' => 'مسار الصورة مطلوب.',
-            'image.string' => 'مسار الصورة يجب أن يكون نصًا.',
-            'image.max' => 'مسار الصورة يجب ألا يتجاوز 500 حرف.',
+            'image.image' => 'الملف المحدد يجب أن يكون صورة.',
+            'image.mimes' => 'صيغة الصورة يجب أن تكون JPG أو JPEG أو PNG أو WEBP.',
+            'image.max' => 'حجم الصورة يجب ألا يتجاوز 5 ميجابايت.',
 
             'description.string' => 'الوصف يجب أن يكون نصًا.',
             'description.max' => 'الوصف يجب ألا يتجاوز 2000 حرف.',

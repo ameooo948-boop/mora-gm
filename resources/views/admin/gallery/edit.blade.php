@@ -20,7 +20,7 @@
 
     <div class="rounded-xl border border-mora-border bg-mora-surface p-6 md:p-8">
 
-        <form action="{{ route('admin.gallery.update', $item->id) }}" method="POST">
+        <form action="{{ route('admin.gallery.update', $item->id) }}" method="POST" enctype="multipart/form-data">
             @include('admin.gallery._form', [
             'mode' => 'edit',
             'item' => $item,

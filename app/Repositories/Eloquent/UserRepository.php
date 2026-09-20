@@ -106,7 +106,24 @@ class UserRepository implements UserRepositoryInterface
         User $user,
         array $data
     ): User {
-        $user->update($data);
+        $emailVerificationReset = array_key_exists(
+            'email_verified_at',
+            $data
+        );
+
+        if ($emailVerificationReset) {
+            $emailVerifiedAt = $data['email_verified_at'];
+
+            unset($data['email_verified_at']);
+
+            $user->update($data);
+
+            $user->forceFill([
+                'email_verified_at' => $emailVerifiedAt,
+            ])->save();
+        } else {
+            $user->update($data);
+        }
 
         return $user->fresh();
     }

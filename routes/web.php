@@ -224,7 +224,7 @@ Route::middleware('auth')->group(function () {
         ->name('verification.send');
 });
 
-Route::middleware(['auth', 'verified', 'role:member'])
+Route::middleware(['auth', 'role:member', 'verified'])
     ->prefix('member')
     ->name('member.')
     ->group(function () {

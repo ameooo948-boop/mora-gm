@@ -29,7 +29,7 @@
                 <div class="{{ $loop->first ? 'aspect-[4/5] md:h-full' : 'aspect-[16/10]' }} relative overflow-hidden">
 
                     <img
-                        src="{{ asset('images/' . $item->image) }}"
+                        src="{{ asset('storage/' . $item->image) }}"
                         alt="{{ $item->title }}"
                         class="h-full w-full object-cover transition duration-700 group-hover:scale-105"
                         loading="lazy"
