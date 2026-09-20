@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\UpdateMemberRequest;
 use App\Services\UserService;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
@@ -33,5 +35,28 @@ class MemberController extends Controller
         return view('admin.members.show', [
             'member' => $user,
         ]);
+    }
+
+    public function update(
+        UpdateMemberRequest $request,
+        int $member
+    ): RedirectResponse {
+        $user = $this->userService->getMember($member);
+
+        if (! $user) {
+            abort(404);
+        }
+
+        $this->userService->updateProfile(
+            $user,
+            $request->validated()
+        );
+
+        return redirect()
+            ->route('admin.members.show', $user->id)
+            ->with(
+                'success',
+                'تم تحديث بيانات العضو بنجاح.'
+            );
     }
 }

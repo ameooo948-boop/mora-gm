@@ -118,6 +118,11 @@ Route::middleware(['auth', 'role:admin'])
             AdminSubscriptionController::class,
             'show',
         ])->name('subscriptions.show');
+
+        Route::put('/members/{member}', [
+            MemberController::class,
+            'update',
+        ])->name('members.update');
     });
 
 Route::middleware('auth')->group(function () {
