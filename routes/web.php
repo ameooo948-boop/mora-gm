@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
+use App\Http\Controllers\Admin\GymProfileController;
 use App\Http\Controllers\Admin\MemberController;
 use App\Http\Controllers\Admin\MembershipPlanController;
 use App\Http\Controllers\Admin\PaymentController as AdminPaymentController;
@@ -160,6 +161,10 @@ Route::middleware(['auth', 'role:admin'])
         Route::resource('membership-plans', MembershipPlanController::class)
             ->only(['index', 'create', 'store', 'edit', 'update'])
             ->names('membership-plans');
+
+        Route::resource('gym-profile', GymProfileController::class)
+            ->only(['index', 'create', 'store', 'edit', 'update'])
+            ->names('gym-profile');
     });
 
 Route::middleware('auth')->group(function () {
